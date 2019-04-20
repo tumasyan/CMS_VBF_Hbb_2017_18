@@ -1,0 +1,37 @@
+
+
+1 stage
+
+0        0.881343
+mqq      0.877371
+etaqq    0.880833
+phiqq    0.880136
+btg1     0.871215
+btg2     0.842216
+qtg1     0.880447
+qtg2     0.877852
+                         nj_iG    0.881430
+ptall    0.879348
+pzall    0.880898
+nj_20    0.876848
+                         HTresr_20    0.881154
+Erest_20     0.875254
+
+
+nj_iG and HTrest_20  excluded
+
+
+2 stage
+
+0         0.881154
+mqq       0.876640
+etaqq     0.880369
+phiqq     0.879803
+btg1      0.870874
+btg2      0.841942
+qtg1      0.880062
+qtg2      0.877808
+ptall     0.878243
+pzall     0.880532
+nj_20     0.857179
+Erest_20  0.874143
