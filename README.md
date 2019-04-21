@@ -9,6 +9,9 @@ git checkout dev
 # Update from remote
 git pull
 
+# Update branch list from remote to local
+git fetch
+
 # Add new files/directoris
 git add --all .
 
