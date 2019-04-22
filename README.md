@@ -15,7 +15,7 @@ git checkout dev (for example)
 ## Update branch from remote
 git pull
 
-## Add new files/directoris
+## Add new files/directories
 git add --all .
 
 ## You comments to changes
