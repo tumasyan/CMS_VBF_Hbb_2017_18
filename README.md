@@ -4,10 +4,10 @@
 git clone https://github.com/tumasyan/CMS_VBF_Hbb_2017_18.git
 
 ## Update branch list from remote to local
-git fetch
+git remote update origin --prune
 
 ## See available list of branches
-git branch
+git branch -a
 
 ## Go to development version
 git checkout dev (for example)
