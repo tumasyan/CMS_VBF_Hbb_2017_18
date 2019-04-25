@@ -39,3 +39,7 @@ git push origin --delete branch_name
 
 ## Create new local branch
 git checkout -b new_branch_name
+
+## Send this new local branch to remote
+git push -u origin new (just first time)
+
