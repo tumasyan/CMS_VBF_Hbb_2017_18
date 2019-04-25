@@ -12,7 +12,7 @@ git remote update origin --prune
 ```bash
 git branch -a
 ```
-## Change the branch. (IF NEEDED)
+## Change the branch (IF NEEDED)
 ```bash
 git checkout branch_name
 ```
