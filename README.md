@@ -36,3 +36,6 @@ git branch -D branch_name
 
 ## Delete remote branch (from github.com)
 git push origin --delete branch_name
+
+## Create new local branch
+git checkout -b new_branch_name
