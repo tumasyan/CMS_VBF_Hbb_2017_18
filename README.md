@@ -6,7 +6,7 @@ git clone https://github.com/tumasyan/CMS_VBF_Hbb_2017_18.git
 ## Update branch list from remote to local
 git remote update origin --prune
 
-## See available list of branches
+## See current branch and available list of branches
 git branch -a
 
 ## Change the branch. (IF NEEDED)
