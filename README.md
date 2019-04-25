@@ -9,7 +9,7 @@ git remote update origin --prune
 ## See available list of branches
 git branch -a
 
-## Change the branch. IF NEEDED
+## Change the branch. (IF NEEDED)
 git checkout branch_name
 
 ## Update your local branch
