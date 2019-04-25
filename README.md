@@ -23,3 +23,11 @@ git commit -m "description"
 
 ## Update remote project
 git push
+
+
+# Less used commands
+## Delete local branch (from your pc)
+git branch -D branch_name
+
+## Delete remote branch (from github.com)
+git push origin --delete branch_name
