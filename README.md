@@ -30,7 +30,7 @@ git push
 
 
 
-# Less used commands
+> # Less used commands
 ### Delete local branch (from your pc)
 > git branch -D branch_name
 
