@@ -1,6 +1,6 @@
 # Instruction for contributors
 
-* Clone project (just first time)
+## Clone project (just first time)
 git clone https://github.com/tumasyan/CMS_VBF_Hbb_2017_18.git
 
 ## Update branch list from remote to local
@@ -32,14 +32,14 @@ git push
 
 # Less used commands
 ### Delete local branch (from your pc)
-git branch -D branch_name
+> git branch -D branch_name
 
 ### Delete remote branch (from github.com)
-git push origin --delete branch_name
+> git push origin --delete branch_name
 
 ### Create new local branch
-git checkout -b new_branch_name
+> git checkout -b new_branch_name
 
 ### Send this new local branch to remote
-git push -u origin new (just first time)
+> git push -u origin new (just first time)
 
