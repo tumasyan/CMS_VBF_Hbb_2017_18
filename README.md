@@ -38,18 +38,10 @@ git push
 ```
 > # Less used commands
 > ### Delete local branch (from your pc)
-```bash
-git branch -D branch_name
-```
+> git branch -D branch_name
 > ### Delete remote branch (from github.com)
-```bash
-git push origin --delete branch_name
-```
+> git push origin --delete branch_name
 > ### Create new local branch
-```bash
-git checkout -b new_branch_name
-```
+> git checkout -b new_branch_name
 > ### Send this new local branch to remote
-```bash
-git push -u origin new (just first time)
-```
+> git push -u origin new (just first time)
