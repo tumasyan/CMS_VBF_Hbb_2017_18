@@ -9,20 +9,25 @@ git remote update origin --prune
 ## See available list of branches
 git branch -a
 
-## Go to development version
-git checkout dev (for example)
+## Change the branch. IF NEEDED
+git checkout branch_name
 
-## Update branch from remote
+## Update your local branch
 git pull
 
 ## Add new files/directories
+git add . 
+    or
 git add --all .
 
-## You comments to changes
-git commit -m "description"
+## You commit your changes
+git commit -m "description of your change"
 
 ## Update remote project
 git push
+
+
+
 
 
 # Less used commands
