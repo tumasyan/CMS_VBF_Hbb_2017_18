@@ -1,8 +1,9 @@
 # Instruction for contributors
 
 ## Clone project (just first time)
+```bash
 git clone https://github.com/tumasyan/CMS_VBF_Hbb_2017_18.git
-
+```
 ## Update branch list from remote to local
 git remote update origin --prune
 
