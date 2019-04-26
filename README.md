@@ -16,7 +16,7 @@ git branch -a
 ```bash
 git checkout branch_name
 ```
-## Update local branch (local <- remote)
+## Update local branch (local :arrow_left: remote)
 ```bash
 git pull
 ```
@@ -32,7 +32,7 @@ git add --all .
 ```bash
 git commit -m "description of your change"
 ```
-## Update remote branch (local -> remote)
+## Update remote branch (local :arrow_right: remote)
 ```bash
 git push
 ```
