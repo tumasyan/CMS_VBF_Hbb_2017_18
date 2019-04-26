@@ -1,6 +1,6 @@
-# Instruction for contributors
+# Instruction for contributors:registered:
 
-## Clone the project (just first time)
+## Clone the project (:heavy_exclamation_mark:just first time)
 ```bash
 git clone https://github.com/tumasyan/CMS_VBF_Hbb_2017_18.git
 ```
@@ -44,4 +44,4 @@ git push
 > ### Create new local branch
 > git checkout -b new_branch_name
 > ### Send this new local branch to remote
-> git push -u origin new (just first time)
+> git push -u origin new (:heavy_exclamation_mark:just first time)
