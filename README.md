@@ -4,7 +4,7 @@
 ```bash
 git clone https://github.com/tumasyan/CMS_VBF_Hbb_2017_18.git
 ```
-## Update branch list from remote to local
+## Update branch list (local :arrow_left: remote)
 ```bash
 git remote update origin --prune
 ```
@@ -43,5 +43,5 @@ git push
 > git push origin --delete branch_name
 > ### Create new local branch
 > git checkout -b new_branch_name
-> ### Send this new local branch to remote
+> ### Send this new local branch to remote  (local :arrow_left: remote)
 > git push -u origin new (:heavy_exclamation_mark:just first time)
