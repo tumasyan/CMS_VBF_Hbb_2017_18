@@ -1,6 +1,6 @@
 # Instruction for contributors
 
-## Clone project (just first time)
+## Clone the project (just first time)
 ```bash
 git clone https://github.com/tumasyan/CMS_VBF_Hbb_2017_18.git
 ```
@@ -16,7 +16,7 @@ git branch -a
 ```bash
 git checkout branch_name
 ```
-## Update your local branch
+## Update local branch (local <- remote)
 ```bash
 git pull
 ```
@@ -28,11 +28,11 @@ or
 ```bash
 git add --all .
 ```
-## You commit your changes
+## Commit your changes
 ```bash
 git commit -m "description of your change"
 ```
-## Update remote project
+## Update remote branch (local -> remote)
 ```bash
 git push
 ```
