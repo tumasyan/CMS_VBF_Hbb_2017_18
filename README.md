@@ -1,4 +1,4 @@
-# Instruction for contributors:registered:
+# Instruction for contributors :registered:
 
 ## Clone the project (:heavy_exclamation_mark:just first time)
 ```bash
