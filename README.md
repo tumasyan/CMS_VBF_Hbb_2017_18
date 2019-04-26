@@ -43,5 +43,5 @@ git push
 > git push origin --delete branch_name
 > ### Create new local branch
 > git checkout -b new_branch_name
-> ### Send this :arrow_up: new local branch to remote  (local :arrow_right: remote) (:heavy_exclamation_mark:just first time, then just ```bash git push ```)
+> ### Send this :arrow_up: new local branch to remote  (local :arrow_right: remote) (:heavy_exclamation_mark:just first time)
 > git push -u origin new 
