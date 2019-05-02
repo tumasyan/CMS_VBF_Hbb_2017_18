@@ -31,11 +31,8 @@ void preReg()
 //*************************************** True b-jets ***************************************
   TTree *partb1 = (TTree*)f1->Get("Training/B_Jets_True_1");
   TTree *partb2 = (TTree*)f1->Get("Training/B_Jets_True_2");
-
   TTree *rec_b = (TTree*)f2->Get("bb");
 
-  // TTree *partq1 = (TTree*)f1->Get("Training/Q_Jets_True_1");
-  // TTree *partq2 = (TTree*)f1->Get("Training/Q_Jets_True_2");
   Float_t ptb1_True;
   Float_t ptb2_True;
   Float_t pt_rec;
@@ -49,27 +46,39 @@ void preReg()
   gStyle->SetOptFile(0);
   gStyle->SetOptStat("mre");
   gStyle->SetPaintTextFormat("1.2e");
-  TNtuple * mc_bb = new TNtuple{"mc_bb","mc_bb","pt"};
-  TNtuple * rec_bb = new TNtuple{"rec_bb","rec_bb","pt"};
+
+  TNtuple * main = new TNtuple{"main","main","mc_pt"};
 
 //***************************************************************************************
 
 // ***********************************************************************************
+int i;
 
-for(int i=0;i<partb1->GetEntries();i++)
+
+
+
+for(i=0;i<partb1->GetEntries();i++)
  {
   partb1->GetEntry(i);
   partb2->GetEntry(i);
 
-  mc_bb -> Fill(ptb1_True);
-  mc_bb -> Fill(ptb2_True);
+  main -> Fill(ptb1_True);
+  main -> Fill(ptb2_True);
  }
 
- for(int i=0;i<rec_b->GetEntries();i++)
+
+ TBranch *rec_pt = main->Branch("rec_pt",&pt_rec,"rec_pt");
+
+ for(i=0;i<rec_b->GetEntries();i++)
  {
   rec_b->GetEntry(i);
-  rec_bb -> Fill(pt_rec);
+  rec_pt -> Fill();
+  // rec_bb -> Fill(pt_rec);
+  // mc_bb->SetBranchAddress("rec_pt",&pt_rec);
  }
+ 
+// cout<<rec_b->GetEntries()<<endl;
+
 // ******************************************************************************
 
   f->Write();
