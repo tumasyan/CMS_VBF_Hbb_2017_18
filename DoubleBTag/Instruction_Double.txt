@@ -1,133 +1,74 @@
 
+# Instruction for VBF_Hbb 2017 DoubleBTag
+  Stage 2 (no need of CMSSW area, just Root including TMVA package)
 
-# Instruction for VBF_Hbb 2017  (Use only for SingleBTag as DoubleBTag is under development)
-
-
-**************************************************************************************************
-# Stage 1 (from CMSSW area, NO need to ReRun just go to Stage 2)
-
-# 1. CMSSW code instalation for MC and Data analysis: Event preselection & NTuples making
-
-cmsrel CMSSW_9_4_6_patch1
-cd CMSSW_9_4_6_patch1/src
-cmsenv
-cp -r /afs/cern.ch/user/t/tumasyan/public/VBF_Hbb_2017/Data_src/* .
-scram b
-
-# 1.a  Event preselection of 2017F Data (7.73 fb-1)
-
-# Input parameters and algorithms for preselection in
-PreSelection/Single_BTg_Filter/src/Input_Parameters.txt
-# Source file is
-PreSelection/Single_BTg_Filter/src/Single_BTg_Filter.cc
-# Python configuration to run (which also adds QGTagger) is
-PreSelection/JOB/SingleB_PreSelection.py
-# Running crab job
-cd PreSelection/JOB/
-python Crab_Single.py
-
-# 1.b  Making NTuples  (7-PT leading jets with PT>20, eta<4.7 and passing loose PuId     and    Other variables including NJets,HTT,...)
-
-# Source file is 
-Analysis/Local/src/Test_On_Data.cc
-# Python configuration to run
-Test/On_Data/Test_On_Data_*.py
-# script to prepare batch jobs is
-Test/On_Data/Test_Execution.csh
-# Root files with Ntuples are located in                             *** If you want to use ready NTuples
-/eos/user/t/tumasyan/Hbb_2017/Preselected_singleB_Data/Test_Results/
-
-
-# 2. CMSSW code instalation for MC analysis: Event preselection & NTuples making, including truth information
-
-(Not complete yet)
-
-# Root files with Ntuples are located in                             *** If you want to use ready NTuples (weights after PuReWeighting are included)
-/eos/user/t/tumasyan/Hbb_2017/Preselected_singleB_MC/Training_Results/
-# Root file for Signal (VBF_Hbb) is
-/eos/user/t/tumasyan/Hbb_2017/Preselected_singleB_MC/Training_Results/Training__VBFHToBB_M_125__.root
-
-
-**************************************************************************************************
-Stage 2 (no need of CMSSW area, just Root including TMVA package)
-
-# Training with TMVA: Jet combination and Signal_vs_Background discrimination 
-# Samples (Root files with NTuples: 7-PT leading jets and  Other variables) are in
-Preselected_NTuples/
-# Where
-Training__Training5perc__.root      is 5% of Data for MVA training
-Training__Training__.root           is full preselected Data ~ 7.73 fb-1
-Training__VBFHToBB_M_125__.root     is VBF_Hbb MC preselected sample
-... NTuples of other MC samples
+  Training with TMVA: Jet combination and Signal_vs_Background discrimination 
+  Samples (Root files with NTuples: 7-PT leading jets and "Other" variables) should be located at
+  SingleBTag/Preselected_NTuples/
+  Where
+  Training__Training5perc__.root      is 5% of Data for MVA training
+  Training__Training__.root           is full preselected Data ~ 7.73 fb-1
+  Training__VBFHToBB_M_125__.root     is VBF_Hbb MC preselected sample
+  ... (NTuples of other MC samples)
 
 # For Analysis
-cd Analysis
-# 1.   PuReWeighting results in
-Pu_ReWeight/
 
-# 2. b-jets identification in signal process with TMVA
-cd TMVA_BJets_Identification
-# Making Ntuples for TMVA training
-root -l Sort.C
-# Training MVA (Gradient BDT method)
-root -l TMVAClassification.C
-# Using TMVA Graphical User Interface
-root -l
-TMVA::TMVAGui("TMVA.root")
-# dataset directory is ready (created) to be used for b-jets selection
-# Checking Final selection performance with TMVA
-root -l TMVA_Training_Result.C
-# Checking Final selection performance with b-tag discriminator
-root -l High_btag_Selected_Jets.C
-# Comparision
-root -l Compare.C
+cd DoubleBTag/Analysis
+1. PuReWeighting results are in CMS_VBF_Hbb_2017_18/Common/Pu_ReWeight/
+   All MC-Samples are reweight according to 
+   https://github.com/UHH2/UHH2/wiki/Pileup-reweighting-for-MC
+   with SimGeneral.MixingModule.mix_2017_25ns_WinterMC_PUScenarioV1_PoissonOOTPU_cfi
+   In addition VBF_Hbb Sample is secondary reweighted as it was done with "wrong" PU (not PU2017)
 
+2. b-jets identification in signal process with high-discriminator criteria
+     cd BJets_Identification
+   Checking Final selection performance with b-tag discriminator
+     root -l High_btag_Selected_Jets.C
 
-# 3.    Making Ntuples for Sig vs Bkg Discrimination and Final Results
-cd ../Making_Ntuples_For_SigBkgDiscrimination
+3. Making Ntuples for Signal vs Background Discrimination and Final Results
+     cd ../Making_Ntuples_For_SigBkgDiscrimination
+   3.1 For data derived approach
+     cd Data_Derived/
+     cp -r ../../TMVA_BJets_Identification/dataset .
+     root -l Data_Derived.C
+   3.2 For MC derived approach. This step also should be done in order to provide MC/Data comparison.
+     cd MC_Derived/
+     cp -r ../../TMVA_BJets_Identification/dataset .
+     root -l MC_Derived.C
 
-For data derived approach
-cd Data_Derived/
-cp -r ../TMVA_BJets_Identification/dataset .
-root -l Data_Derived.C
+4. Signal vs Background discrimination using TMVA and final results
+     cd ../../TMVA_Signal_vs_Background_Separation/
+   For data derived approach (Recommended)
+     cd withData
+   MVA (Gradient BDT) Training
+     root -l TMVAClassification.C
+   Creating Mbb for Signal_MC (VBF and ggF), Bakground (5% of Data) and Observed (Full Data) based on Trained BDT
+   Ooutput will be Mbb_All.root, which will be used in fits (estimation of deviation from pure-background model)
+     root -l Mbb_For_Sig_Bkg_Obs.C
+   Comparision of BDT responce for Signal_MC (VBF_Hbb_MC) and observed (Data_2017F)
+     root -l bdt_res.C
+     root -l Compare.C
+   BDT variables were optimized with N-1 test.To set "Under-ROC integrall" vs "variable" dependece switch off "variable" in TMVAClassification.C and
+     cd Nm1_Test/
+     root -l ROC_Integrall.C
+   Results ("variable importance") of optimized variables 
+     root -l Nm1Res.C
+   For MC derived approach (NOT recommended, NO sufficient MC-statistics, fluctuations are significant)
+     cd ../../withMC
+   MVA (Gradient BDT) Training
+     root -l TMVAClassification.C
 
-For MC derived approach
-cd MC_Derived/
-cp -r ../TMVA_BJets_Identification/dataset .
-root -l MC_Derived.C
-
-
-# 4.    Signal vs Background discrimination using TMVA and final results
-#For data derived approach
-cd ../../TMVA_Signal_vs_Background_Separation/withData
-# MVA (Gradient BDT) Training
-root -l TMVAClassification.C
-# Creating Mbb for Signal_MC (VBF and ggF), Bakground (5% of Data) and Observed (Full Data) based on Trained BDT
-# output will be Mbb_All.root, which will be used in fits (estimation of deviation from pure-background model)
-root -l Mbb_For_Sig_Bkg_Obs.C
-
-# Comparision of BDT responce for Signal_MC (VBF_Hbb_MC) and observed (Data_2017F)
-root -l bdt_res.C
-root -l Compare.C
-
-#For MC derived approach
-cd ../../TMVA_Signal_vs_Background_Separation/withMC
-# MVA (Gradient BDT) Training
-root -l TMVAClassification.C   (or dataset from dtat-derived training can be used - cp -r ../WithData/dataset .)
-# Creating Mbb for Signal_MC (VBF and ggF) and Bakground (MC-QCD + other samples)
-root -l Mbb_For_Sig_Bkg.C
-# Comparision of BDT responce for Signal_MC (VBF_Hbb_MC) and background (MC-QCD)
-root -l bdt_res.C
-root -l Compare.C
-
-
-# 5. Mbb correlation
-
-root -l mbb_Correlation.C  (takes a while - 2-3 min)
-
-#use root macros output in corr_res.C
-root -l corr_res.C
-
-
-
-
+5. MC vs Data comparison.
+   Goto CMS_VBF_Hbb_2017_18/SingleBTag/Analysis/TMVA_Signal_vs_Background_Separation/withMC/
+   Get data based trained .xml
+     cp -r ../withData/dataset .
+   Mbb correlation: Mean_Mbb vs BDT-output. This is first step of background model validation
+     cd Correlation/
+     root -l mbb_Correlation.C  (takes a while - 3-5 min)
+   Make Data vs MC comparison for various variables:
+   PT1, PT2, PT3 -> First 3 pt-ordered jets in event.
+   BTG1, BTG2 -> b-discriminator of 1st and 2nd b-jets.
+   MINVQQ, DETAQQ, PTALL, MINVBB ... Use the script AllScr.sh
+     cd Data_vs_MC/
+     cp -r ../dataset .
+     ./AllScr.sh

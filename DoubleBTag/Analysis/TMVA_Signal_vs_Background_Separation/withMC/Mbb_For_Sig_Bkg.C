@@ -27,11 +27,9 @@ void Mbb_For_Sig_Bkg()
    reader->AddVariable( "btgb2_D",                 &btgb2_D );
    reader->AddVariable( "qtgq1",                 &qtgq1 );
    reader->AddVariable( "qtgq2",                 &qtgq2 );
-   reader->AddVariable( "NJ_ingap",                 &NJ_ingap );
    reader->AddVariable( "pt_All",                 &pt_All );
    reader->AddVariable( "pz_All",                 &pz_All );
    reader->AddVariable( "Njet_20",                 &Njet_20 );
-   reader->AddVariable( "HTT_rest_20",            &HTT_rest_20 );
    reader->AddVariable( "E_rest_20",            &E_rest_20 );
    reader->AddSpectator( "minvbb",                 &minvbb );
 

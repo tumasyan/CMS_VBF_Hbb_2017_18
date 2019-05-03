@@ -79,25 +79,24 @@ void bdt()
    TFile *f12 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_TTToHadronic_TuneCP5_.root");
    TFile *f13 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_TTToSemiLeptonic_TuneCP5_.root");
 //WJets
-   TFile *f14 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT400to600_qc19_3j_TuneCP5_.root");
-   TFile *f15 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT600to800_qc19_3j_TuneCP5_.root");
-   TFile *f16 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT_800toInf_qc19_3j_TuneCP5_.root");
+   TFile *f14 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT400to600_TuneCP5_.root");
+   TFile *f15 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT600to800_TuneCP5_.root");
 //ZJets
-   TFile *f17 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT400to600_qc19_4j_TuneCP5_.root");
-   TFile *f18 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT600to800_qc19_4j_TuneCP5_.root");
-   TFile *f19 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT_800toInf_qc19_4j_TuneCP5_.root");
+   TFile *f16 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT400to600_TuneCP5_.root");
+   TFile *f17 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT600to800_3j_TuneCP5_.root");
+   TFile *f18 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT_800toInf_TuneCP5_.root");
 //DYJets_ToQQ
-   TFile *f20 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_DYJetsToQQ_HT180_.root");
+   TFile *f19 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_DYJetsToQQ_HT180_.root");
 // Full Data
-   TFile *f21 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/Data_Derived/NTuples_Full_Data_.root");
+   TFile *f20 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/Data_Derived/NTuples_Full_Data_.root");
 
-   TTree * ntpb[] =  { (TTree*)f0->Get("Bkg"),(TTree*)f1->Get("Bkg"),(TTree*)f2->Get("Bkg"),(TTree*)f3->Get("Bkg"),(TTree*)f4->Get("Bkg"),(TTree*)f5->Get("Bkg"),(TTree*)f6->Get("Bkg"),
+   TTree * ntpb[21] = { (TTree*)f0->Get("Bkg"),(TTree*)f1->Get("Bkg"),(TTree*)f2->Get("Bkg"),(TTree*)f3->Get("Bkg"),(TTree*)f4->Get("Bkg"),(TTree*)f5->Get("Bkg"),(TTree*)f6->Get("Bkg"),
                         (TTree*)f7->Get("Bkg"),(TTree*)f8->Get("Bkg"),(TTree*)f9->Get("Bkg"),(TTree*)f10->Get("Bkg"),
                         (TTree*)f11->Get("Bkg"),(TTree*)f12->Get("Bkg"),(TTree*)f13->Get("Bkg"),
-                        (TTree*)f14->Get("Bkg"),(TTree*)f15->Get("Bkg"),(TTree*)f16->Get("Bkg"),
-                        (TTree*)f17->Get("Bkg"),(TTree*)f18->Get("Bkg"),(TTree*)f19->Get("Bkg"),
-                        (TTree*)f20->Get("Bkg"),
-                        (TTree*)f21->Get("Bkg")
+                        (TTree*)f14->Get("Bkg"),(TTree*)f15->Get("Bkg"),
+                        (TTree*)f16->Get("Bkg"),(TTree*)f17->Get("Bkg"),(TTree*)f18->Get("Bkg"),
+                        (TTree*)f19->Get("Bkg"),
+                        (TTree*)f20->Get("Bkg")
                       };
 
    int nBProc = sizeof(ntpb)/sizeof(ntpb[0]);
@@ -188,15 +187,16 @@ void bdt()
       _BDT_Single_Top->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
      else if(k>=11 && k<14)
       _BDT_tt->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
-     else if(k>=14 && k<17)
+     else if(k>=14 && k<16)
       _BDT_WJets->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
-     else if(k>=17 && k<20)
+     else if(k>=16 && k<19)
       _BDT_ZJets->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
-     else if(k==20)
+     else if(k==19)
       _BDT_DYJets->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
-     else if(k==21)
+     else if(k==20)
       _BDT_DATA->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
     }
+
 
   f->Write();
   delete f00;
@@ -222,6 +222,5 @@ void bdt()
   delete f17;
   delete f18;
   delete f19;
-  delete f20;
-  delete f21;
 }
+

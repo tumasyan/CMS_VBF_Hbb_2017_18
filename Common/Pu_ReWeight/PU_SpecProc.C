@@ -16,14 +16,7 @@
 void PU_SpecProc()
 {
 
-//  TFile *f = new TFile("Training__QCD_HT1000to1500_TuneCP5__.root");
-//  TFile *f = new TFile("../../Preselected_NTuples/Training__QCD_HT700to1000_TuneCP5__.root");
-//  TFile *f = new TFile("../../Preselected_NTuples/Training__QCD_HT500to700_TuneCP5__.root");
-  TFile *f = new TFile("../../Preselected_NTuples/Training__QCD_HT300to500_TuneCP5__.root");
-//  TFile *f = new TFile("../../Preselected_NTuples/Training__QCD_HT200to300_TuneCP5__.root");
-//  TFile *f = new TFile("../../Preselected_NTuples/Training__QCD_HT1000to1500_TuneCP5__.root");
-//  TFile *f = new TFile("../../Preselected_NTuples/Training__QCD_HT1500to2000_TuneCP5__.root");
-//  TFile *f = new TFile("../../Preselected_NTuples/Training__QCD_HT2000toInf_TuneCP5__.root");
+  TFile *f = new TFile("../../SingleBTag/Preselected_NTuples/Training__VBFHToBB_M_125__.root");
   TTree *other = (TTree*)f->Get("Training/Other_variables");
   Float_t npv;
   other->SetBranchAddress("Tnpv",&npv);
