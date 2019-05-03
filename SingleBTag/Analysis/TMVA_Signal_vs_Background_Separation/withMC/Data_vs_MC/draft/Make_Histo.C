@@ -2,64 +2,49 @@
 #include "TStyle.h"
 #include "TGaxis.h"
 #include "TRandom.h"
-
 #include <iostream>
 #include <math.h>
 #include <TF1.h>
 #include <TH1D.h>
 #include "TCanvas.h"
 
-void Compare()
+void Make_Histo()
 {
+  TString Var_Name[] = {"PT1","PT2","PT3","PTALL","MINVQQ","DETAQQ","BTG1","BTG2","MINVBB"};
+  int Nbin[]         = {50,50,50,100,100,100,100,100,100};
+  double Xmin[]      = {100,80,60,100,400,4,0,0,0};
+  double Xmax[]      = {500,400,300,1000,3000,10,1,1,500};
+  int nVar = sizeof(Var_Name)/sizeof(Var_Name[0]);
+
+for(int variab = 0; variab < nVar; variab++)
+ {
+  TString variable = Var_Name[variab];
+  int nbin = Nbin[variab];
+  double xmin = Xmin[variab];
+  double xmax = Xmax[variab];
+
   gStyle->SetOptFile(0);
   gStyle->SetOptStat("m");
   SetStyle();
 
-  TString variable = "BDT";
-//  TString variable = "BTG1";
-//  TString variable = "BTG2";
-//  TString variable = "DETAQQ";
-//  TString variable = "MINVQQ";
-//  TString variable = "PTALL";
-//  TString variable = "PT1";
-//  TString variable = "PT2";
-//  TString variable = "PT3";
-
-  int nbin=100;
-//  int nbin=50;    //pt
-
-//  double xmin=400;         //minv
-//  double xmin=100;         //pt1
-//  double xmin=80;        //pt2
-//  double xmin=60;        //pt3
-  double xmin=-1;        //bdt
-//  double xmin=0;        //btg
-//  double xmin=4;        // deta
-
-//  double xmax=1;       // btg
-//  double xmax=10;      // deta
-//  double xmax=1000;    // pt_All
-//  double xmax=500;    // pt1
-//  double xmax=400;    // pt2
-//  double xmax=300;    // pt3
-  double xmax=1;       // bdt
-//  double xmax=3000;    // minv
-
-//  TString hist_name[] = {"BDT_QCD","BDT_Single_Top","BDT_tt","BDT_WJets","BDT_ZJets","BDT_DYJets","BDT_VBF_Hbb","BDT_ggF_Hbb"};
-//  TString hist_name[] = {"BDT_QCD","BDT_Single_Top","BDT_tt","BDT_WJets","BDT_DYJets","BDT_VBF_Hbb","BDT_ggF_Hbb"};
-  TString hist_name[] = {variable+"_DYJets",variable+"_WJets",variable+"_Single_Top",variable+"_tt",variable+"_QCD",variable+"_VBF_Hbb",variable+"_ggF_Hbb",variable+"_DATA"};
+  TString hist_name[] = {variable+"_DYJets",variable+"_ZJets",variable+"_WJets",variable+"_Single_Top",variable+"_tt",variable+"_QCD",variable+"_VBF_Hbb",variable+"_ggF_Hbb",variable+"_DATA"};
   int Nhisto = sizeof(hist_name)/sizeof(hist_name[0]);
 
-    TCanvas *Convas_1 = new TCanvas();
-    Convas_1->SetRightMargin(0.3);
-    Convas_1->SetBottomMargin(0.35);
+  TCanvas *Convas_1 = new TCanvas();
+  Convas_1->SetRightMargin(0.3);
+  Convas_1->SetBottomMargin(0.35);
 
-      TFile* f1 = new TFile(variable+"_Output.root");
+  TFile* f1 = new TFile(variable+"_Output.root");
+  TH1D* histoTot[Nhisto];
+  TString histoTot_Name[Nhisto];
 
-      TH1D* histoTot[Nhisto];
-      TString histoTot_Name[Nhisto];
   for( int j=0; j<Nhisto; j++)
    {
+      Float_t xVal = (xmax-xmin)/nbin;
+      TString xtitle = "Events / ";
+      xtitle+=Form("%.1f",xVal);
+      if (variable == "PT1" || variable == "PT2" || variable == "PT3" || variable == "PTALL" || variable == "MINVQQ" || variable == "MinvBB")
+         xtitle+=" GeV";
       histoTot_Name[j]="histoTot";
       histoTot_Name[j]+=j;
       histoTot[j] = new TH1D(histoTot_Name[j],histoTot_Name[j],nbin,xmin,xmax);
@@ -70,7 +55,7 @@ void Compare()
       histoTot[j]->GetXaxis()->SetTitleOffset(2.9);
       histoTot[j]->GetXaxis()->SetTitleFont(42);
       histoTot[j]->GetYaxis()->SetNdivisions(505);
-      histoTot[j]->GetYaxis()->SetTitle("Events / 0.02");
+      histoTot[j]->GetYaxis()->SetTitle(xtitle);
       histoTot[j]->GetYaxis()->SetLabelFont(42);
       histoTot[j]->GetYaxis()->SetLabelSize(0.04);
       histoTot[j]->GetYaxis()->SetLabelOffset(0.01);
@@ -78,38 +63,45 @@ void Compare()
       histoTot[j]->GetYaxis()->SetTitleFont(42);
       histoTot[j]->SetTitle("preliminary   7.7 fb^{-1}");
 
-      if(j==0 || j>=5)
+      if(j==0 || j>=6)
        histoTot[j]->Add(histo);
-      else if (j<5)
+      else if (j<6)
        histoTot[j]->Add(histoTot[j-1],histo);
    }
 
       double ymin=10e-2;
       double ymax=10e4;
 
+      histoTot[5]->Draw("HIST same");
+      histoTot[5]->SetFillColor(43);
+      histoTot[5]->SetLineWidth(1);
+      histoTot[5]->SetLineStyle(1);
+      histoTot[5]->SetMaximum(ymax);
+      histoTot[5]->SetMinimum(ymin);
+
       histoTot[4]->Draw("HIST same");
-      histoTot[4]->SetFillColor(43);
+      histoTot[4]->SetFillColor(kOrange-2);
       histoTot[4]->SetLineWidth(1);
       histoTot[4]->SetLineStyle(1);
       histoTot[4]->SetMaximum(ymax);
       histoTot[4]->SetMinimum(ymin);
 
       histoTot[3]->Draw("HIST same");
-      histoTot[3]->SetFillColor(kOrange-2);
+      histoTot[3]->SetFillColor(kGray);
       histoTot[3]->SetLineWidth(1);
       histoTot[3]->SetLineStyle(1);
       histoTot[3]->SetMaximum(ymax);
       histoTot[3]->SetMinimum(ymin);
 
       histoTot[2]->Draw("HIST same");
-      histoTot[2]->SetFillColor(kGray);
+      histoTot[2]->SetFillColor(kGreen-2);
       histoTot[2]->SetLineWidth(1);
       histoTot[2]->SetLineStyle(1);
       histoTot[2]->SetMaximum(ymax);
       histoTot[2]->SetMinimum(ymin);
 
       histoTot[1]->Draw("HIST same");
-      histoTot[1]->SetFillColor(kGreen-2);
+      histoTot[1]->SetFillColor(kGreen-7);
       histoTot[1]->SetLineWidth(1);
       histoTot[1]->SetLineStyle(1);
       histoTot[1]->SetMaximum(ymax);
@@ -117,32 +109,32 @@ void Compare()
 
       histoTot[0]->Draw("HIST same");
       histoTot[0]->SetFillColor(kGreen-7);
-      histoTot[0]->SetLineWidth(1);
+      histoTot[0]->SetLineWidth(0);           // DYJets and ZJets are merged
       histoTot[0]->SetLineStyle(1);
       histoTot[0]->SetMaximum(ymax);
       histoTot[0]->SetMinimum(ymin);
 
-      histoTot[5]->SetLineColor(kRed);
-      histoTot[5]->SetLineWidth(3);
-      histoTot[5]->Draw("HIST same");
-      histoTot[5]->SetMaximum(ymax);
-      histoTot[5]->SetMinimum(ymin);
-
-      histoTot[6]->SetLineColor(kBlue);
-      histoTot[6]->SetLineStyle(2);
+      histoTot[6]->SetLineColor(kRed);
       histoTot[6]->SetLineWidth(3);
       histoTot[6]->Draw("HIST same");
       histoTot[6]->SetMaximum(ymax);
       histoTot[6]->SetMinimum(ymin);
 
-      histoTot[7]->Draw("E same");
-      histoTot[7]->SetMarkerColor(1);
-      histoTot[7]->SetMarkerStyle(20);
-      histoTot[7]->SetMarkerSize(1.1);
-      histoTot[7]->SetLineColor(1);
+      histoTot[7]->SetLineColor(kBlue);
+      histoTot[7]->SetLineStyle(2);
       histoTot[7]->SetLineWidth(3);
+      histoTot[7]->Draw("HIST same");
       histoTot[7]->SetMaximum(ymax);
       histoTot[7]->SetMinimum(ymin);
+
+      histoTot[8]->Draw("E same");
+      histoTot[8]->SetMarkerColor(1);
+      histoTot[8]->SetMarkerStyle(20);
+      histoTot[8]->SetMarkerSize(1.1);
+      histoTot[8]->SetLineColor(1);
+      histoTot[8]->SetLineWidth(3);
+      histoTot[8]->SetMaximum(ymax);
+      histoTot[8]->SetMinimum(ymin);
 
      Convas_1->SetLogy();
 
@@ -168,8 +160,8 @@ void Compare()
 
     float chi2 = 0;
     for (int iB=1; iB<=100; ++iB) {
-      float xData = histoTot[7]->GetBinContent(iB);
-      float xMC = histoTot[4]->GetBinContent(iB);
+      float xData = histoTot[8]->GetBinContent(iB);
+      float xMC = histoTot[5]->GetBinContent(iB);
       if (xMC>1e-1) {
 	float diff2 = (xData-xMC)*(xData-xMC);
 	chi2 += diff2/xMC;
@@ -209,8 +201,8 @@ void Compare()
     ratioH->SetMarkerSize(1.2);
 
     for (int iB=1; iB<=100; ++iB) {
-      float x1 = histoTot[7]->GetBinContent(iB);
-      float x2 = histoTot[4]->GetBinContent(iB);
+      float x1 = histoTot[8]->GetBinContent(iB);
+      float x2 = histoTot[5]->GetBinContent(iB);
       ratioErrH->SetBinContent(iB,1.0);
       ratioErrH->SetBinError(iB,0.0);
       float xBkg = bkgdErr->GetBinContent(iB);
@@ -273,15 +265,20 @@ void Compare()
     SetLegendStyle(leg);
     leg->SetTextSize(0.03);
     leg->AddEntry(histoTot[7],"Data","p");
-    leg->AddEntry(histoTot_Name[5],"VBF_Hbb, m(H)=125","l");
-    leg->AddEntry(histoTot_Name[6],"ggF_Hbb, m(H)=125","l");
-    leg->AddEntry(histoTot_Name[0],"Z + jets","f");
-    leg->AddEntry(histoTot_Name[1],"W + jets","f");
-    leg->AddEntry(histoTot_Name[2],"Single Top","f");
-    leg->AddEntry(histoTot_Name[3],"t#bar{t}","f");
-    leg->AddEntry(histoTot_Name[4],"QCD","f");
+    leg->AddEntry(histoTot_Name[6],"VBF_Hbb, m(H)=125","l");
+    leg->AddEntry(histoTot_Name[7],"ggF_Hbb, m(H)=125","l");
+    leg->AddEntry(histoTot_Name[1],"Z + jets","f");
+    leg->AddEntry(histoTot_Name[2],"W + jets","f");
+    leg->AddEntry(histoTot_Name[3],"Single Top","f");
+    leg->AddEntry(histoTot_Name[4],"t#bar{t}","f");
+    leg->AddEntry(histoTot_Name[5],"QCD","f");
     leg->AddEntry(ratioErrH,"MC stat. unc.","f");
     leg->Draw("same");
 
+    TImage *img = TImage::Create();
+    img->FromPad(Convas_1);
+    img->WriteImage(variable+".png");
+    Convas_1->Close();
 
+ } // End of variab loop
 }

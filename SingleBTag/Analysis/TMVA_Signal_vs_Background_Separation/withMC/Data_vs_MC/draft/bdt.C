@@ -15,8 +15,24 @@
 #include "TMVA/Reader.h"
 #include "TMVA/MethodCuts.h"
 
-void btg1()
+void bdt()
 {
+   Float_t minvqq,detaqq,dphiqq,btgb1_D,btgb2_D,qtgq1,qtgq2,NJ_ingap,pt_All,pz_All,Njet_20,HTT_rest_20,E_rest_20,minvbb;
+   TMVA::Reader *reader = new TMVA::Reader( "!Color:!Silent" );
+   reader->AddVariable( "mqq",                   &minvqq );
+   reader->AddVariable( "detaqq",                &detaqq );
+   reader->AddVariable( "dphiqq",                &dphiqq );
+   reader->AddVariable( "btgb1_D",                 &btgb1_D );
+   reader->AddVariable( "btgb2_D",                 &btgb2_D );
+   reader->AddVariable( "qtgq1",                 &qtgq1 );
+   reader->AddVariable( "qtgq2",                 &qtgq2 );
+   reader->AddVariable( "pt_All",                 &pt_All );
+   reader->AddVariable( "pz_All",                 &pz_All );
+   reader->AddVariable( "Njet_20",                 &Njet_20 );
+   reader->AddVariable( "E_rest_20",            &E_rest_20 );
+   reader->AddSpectator( "minvbb",                 &minvbb );
+
+   reader->BookMVA("TMVAClassification_BDTG", "dataset/weights/TMVAClassification_BDTG.weights.xml" );
 
 // ***************************************************************************************************************
 // Signal
@@ -104,55 +120,82 @@ void btg1()
     ntpb[k]->SetBranchAddress( "minvbb",                 &MyB_minvbb[k]);
    }
 //***************************************************************************************
-  TFile *f = new TFile("BTG1_Output.root","RECREATE");
+  TFile *f = new TFile("BDT_Output.root","RECREATE");
   gStyle->SetOptFile(0);
   gStyle->SetOptStat("mre");
   gStyle->SetPaintTextFormat("1.2e");
 
-  double xmin=0;
+  double xmin=-1;
   double xmax=1;
 
-  TH1D * _BTG1_VBF_Hbb  = new TH1D("BTG1_VBF_Hbb","BTG1_VBF_Hbb",100,xmin,xmax);
-  TH1D * _BTG1_ggF_Hbb  = new TH1D("BTG1_ggF_Hbb","BTG1_ggF_Hbb",100,xmin,xmax);
-  TH1D * _BTG1_QCD  = new TH1D("BTG1_QCD","BTG1_QCD",100,xmin,xmax);
-  TH1D * _BTG1_Single_Top  = new TH1D("BTG1_Single_Top","BTG1_Single_Top",100,xmin,xmax);
-  TH1D * _BTG1_tt  = new TH1D("BTG1_tt","BTG1_tt",100,xmin,xmax);
-  TH1D * _BTG1_WJets  = new TH1D("BTG1_WJets","BTG1_WJets",100,xmin,xmax);
-  TH1D * _BTG1_ZJets  = new TH1D("BTG1_ZJets","BTG1_ZJets",100,xmin,xmax);
-  TH1D * _BTG1_DYJets = new TH1D("BTG1_DYJets","BTG1_DYJets",100,xmin,xmax);
-  TH1D * _BTG1_DATA   = new TH1D("BTG1_DATA","BTG1_DATA",100,xmin,xmax);
+  TH1D * _BDT_VBF_Hbb  = new TH1D("BDT_VBF_Hbb","BDT_VBF_Hbb",100,xmin,xmax);
+  TH1D * _BDT_ggF_Hbb  = new TH1D("BDT_ggF_Hbb","BDT_ggF_Hbb",100,xmin,xmax);
+  TH1D * _BDT_QCD  = new TH1D("BDT_QCD","BDT_QCD",100,xmin,xmax);
+  TH1D * _BDT_Single_Top  = new TH1D("BDT_Single_Top","BDT_Single_Top",100,xmin,xmax);
+  TH1D * _BDT_tt  = new TH1D("BDT_tt","BDT_tt",100,xmin,xmax);
+  TH1D * _BDT_WJets  = new TH1D("BDT_WJets","BDT_WJets",100,xmin,xmax);
+  TH1D * _BDT_ZJets  = new TH1D("BDT_ZJets","BDT_ZJets",100,xmin,xmax);
+  TH1D * _BDT_DYJets = new TH1D("BDT_DYJets","BDT_DYJets",100,xmin,xmax);
+  TH1D * _BDT_DATA   = new TH1D("BDT_DATA","BDT_DATA",100,xmin,xmax);
 //***************************************************************************************
 
   for(int k=0;k<nSProc;k++)
    for(int i=0;i<ntps[k]->GetEntries();i++)
     {
      ntps[k]->GetEntry(i);
+     minvqq   = MyS_minvqq[k];
+     detaqq   = MyS_detaqq[k];
+     dphiqq   = MyS_dphiqq[k];
+     btgb1_D  = MyS_btgb1_D[k];
+     btgb2_D  = MyS_btgb2_D[k];
+     qtgq1    = MyS_qtgq1[k];
+     qtgq2    = MyS_qtgq2[k];
+     NJ_ingap = MyS_NJ_ingap[k];
+     pt_All   = MyS_pt_All[k];
+     pz_All   = MyS_pz_All[k];
+     Njet_20  = MyS_Njet_20[k];
+     HTT_rest_20  = MyS_HTT_rest_20[k];
+     E_rest_20  = MyS_E_rest_20[k];
+     minvbb   = MyS_minvbb[k];
      if(k==0)
-      _BTG1_VBF_Hbb->Fill(MyS_btgb1_D[k],MyS_weight[k]);
+      _BDT_VBF_Hbb->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyS_weight[k]);
      if(k==1)
-      _BTG1_ggF_Hbb->Fill(MyS_btgb1_D[k],MyS_weight[k]);
+      _BDT_ggF_Hbb->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyS_weight[k]);
     }
 
   for(int k=0;k<nBProc;k++)
    for(int i=0;i<ntpb[k]->GetEntries();i++)
     {
      ntpb[k]->GetEntry(i);
+     minvqq   = MyB_minvqq[k];
+     detaqq   = MyB_detaqq[k];
+     dphiqq   = MyB_dphiqq[k];
+     btgb1_D  = MyB_btgb1_D[k];
+     btgb2_D  = MyB_btgb2_D[k];
+     qtgq1    = MyB_qtgq1[k];
+     qtgq2    = MyB_qtgq2[k];
+     NJ_ingap = MyB_NJ_ingap[k];
+     pt_All   = MyB_pt_All[k];
+     pz_All   = MyB_pz_All[k];
+     Njet_20  = MyB_Njet_20[k];
+     HTT_rest_20  = MyB_HTT_rest_20[k];
+     E_rest_20  = MyB_E_rest_20[k];
+     minvbb   = MyB_minvbb[k];
      if(k<7)
-      _BTG1_QCD->Fill(MyB_btgb1_D[k],MyB_weight[k]);
+      _BDT_QCD->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
      else if(k>=7 && k<11)
-      _BTG1_Single_Top->Fill(MyB_btgb1_D[k],MyB_weight[k]);
+      _BDT_Single_Top->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
      else if(k>=11 && k<14)
-      _BTG1_tt->Fill(MyB_btgb1_D[k],MyB_weight[k]);
+      _BDT_tt->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
      else if(k>=14 && k<16)
-      _BTG1_WJets->Fill(MyB_btgb1_D[k],MyB_weight[k]);
+      _BDT_WJets->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
      else if(k>=16 && k<19)
-      _BTG1_ZJets->Fill(MyB_btgb1_D[k],MyB_weight[k]);
+      _BDT_ZJets->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
      else if(k==19)
-      _BTG1_DYJets->Fill(MyB_btgb1_D[k],MyB_weight[k]);
+      _BDT_DYJets->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
      else if(k==20)
-      _BTG1_DATA->Fill(MyB_btgb1_D[k],MyB_weight[k]);
+      _BDT_DATA->Fill(reader->EvaluateMVA("TMVAClassification_BDTG"),MyB_weight[k]);
     }
-
 
 
   f->Write();

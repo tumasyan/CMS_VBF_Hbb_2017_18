@@ -37,8 +37,6 @@ int TMVAClassification( TString myMethodList = "" )
    dataloader->AddVariable( "feta_ord",             'I' );
    dataloader->AddVariable( "btg_D",             "BTG_Deep", "units", 'F' );
    dataloader->AddVariable( "btg_D_ord",            'I' );
-//   dataloader->AddVariable( "btg",             "BTG", "units", 'F' );
-//   dataloader->AddVariable( "btg_ord",            'I' );
    dataloader->AddVariable( "puid",             "PUID", "units", 'F' );
 
    dataloader->AddSignalTree    ( signalTree );

@@ -26,7 +26,7 @@ void pt2()
    TTree * ntps_pt[2] = {(TTree*)f00->Get("Sig_pt"), (TTree*)f01->Get("Sig_pt")};
    int nSProc = sizeof(ntps)/sizeof(ntps[0]);
    Float_t MyS_weight[nSProc],MyS_minvqq[nSProc],MyS_detaqq[nSProc],MyS_dphiqq[nSProc],MyS_btgb1_D[nSProc],MyS_btgb2_D[nSProc],MyS_qtgq1[nSProc],MyS_qtgq2[nSProc],MyS_NJ_ingap[nSProc],MyS_pt_All[nSProc],MyS_pz_All[nSProc],MyS_Njet_20[nSProc],MyS_HTT_rest_20[nSProc],MyS_E_rest_20[nSProc],MyS_minvbb[nSProc];
-   Float_t MyS_pt1[nSProc],MyS_pt2[nSProc];
+   Float_t MyS_pt1[nSProc],MyS_pt2[nSProc],MyS_pt3[nSProc];
 
    for(int k=0;k<nSProc;k++)
    {
@@ -48,6 +48,7 @@ void pt2()
 
     ntps_pt[k]->SetBranchAddress( "PT1",                 &MyS_pt1[k] );
     ntps_pt[k]->SetBranchAddress( "PT2",                 &MyS_pt2[k] );
+    ntps_pt[k]->SetBranchAddress( "PT3",                 &MyS_pt3[k] );
    }
 
 // QCD
@@ -68,39 +69,40 @@ void pt2()
    TFile *f12 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_TTToHadronic_TuneCP5_.root");
    TFile *f13 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_TTToSemiLeptonic_TuneCP5_.root");
 //WJets
-   TFile *f14 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT400to600_TuneCP5_.root");
-   TFile *f15 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT600to800_TuneCP5_.root");
+   TFile *f14 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT400to600_qc19_3j_TuneCP5_.root");
+   TFile *f15 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT600to800_qc19_3j_TuneCP5_.root");
+   TFile *f16 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT_800toInf_qc19_3j_TuneCP5_.root");
 //ZJets
-   TFile *f16 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT400to600_TuneCP5_.root");
-   TFile *f17 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT600to800_3j_TuneCP5_.root");
-   TFile *f18 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT_800toInf_TuneCP5_.root");
+   TFile *f17 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT400to600_qc19_4j_TuneCP5_.root");
+   TFile *f18 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT600to800_qc19_4j_TuneCP5_.root");
+   TFile *f19 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT_800toInf_qc19_4j_TuneCP5_.root");
 //DYJets_ToQQ
-   TFile *f19 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_DYJetsToQQ_HT180_.root");
+   TFile *f20 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_DYJetsToQQ_HT180_.root");
 // Full Data
-   TFile *f20 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/Data_Derived/NTuples_Full_Data_.root");
+   TFile *f21 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/Data_Derived/NTuples_Full_Data_.root");
 
-   TTree * ntpb[21]  =   { (TTree*)f0->Get("Bkg"),(TTree*)f1->Get("Bkg"),(TTree*)f2->Get("Bkg"),(TTree*)f3->Get("Bkg"),(TTree*)f4->Get("Bkg"),(TTree*)f5->Get("Bkg"),(TTree*)f6->Get("Bkg"),
-                           (TTree*)f7->Get("Bkg"),(TTree*)f8->Get("Bkg"),(TTree*)f9->Get("Bkg"),(TTree*)f10->Get("Bkg"),
-                           (TTree*)f11->Get("Bkg"),(TTree*)f12->Get("Bkg"),(TTree*)f13->Get("Bkg"),
-                           (TTree*)f14->Get("Bkg"),(TTree*)f15->Get("Bkg"),
-                           (TTree*)f16->Get("Bkg"),(TTree*)f17->Get("Bkg"),(TTree*)f18->Get("Bkg"),
-                           (TTree*)f19->Get("Bkg"),
-                           (TTree*)f20->Get("Bkg")
-                         };
+   TTree * ntpb[22] = { (TTree*)f0->Get("Bkg"),(TTree*)f1->Get("Bkg"),(TTree*)f2->Get("Bkg"),(TTree*)f3->Get("Bkg"),(TTree*)f4->Get("Bkg"),(TTree*)f5->Get("Bkg"),(TTree*)f6->Get("Bkg"),
+                        (TTree*)f7->Get("Bkg"),(TTree*)f8->Get("Bkg"),(TTree*)f9->Get("Bkg"),(TTree*)f10->Get("Bkg"),
+                        (TTree*)f11->Get("Bkg"),(TTree*)f12->Get("Bkg"),(TTree*)f13->Get("Bkg"),
+                        (TTree*)f14->Get("Bkg"),(TTree*)f15->Get("Bkg"),(TTree*)f16->Get("Bkg"),
+                        (TTree*)f17->Get("Bkg"),(TTree*)f18->Get("Bkg"),(TTree*)f19->Get("Bkg"),
+                        (TTree*)f20->Get("Bkg"),
+                        (TTree*)f21->Get("Bkg")
+                      };
 
-   TTree * ntpb_pt[21] = { (TTree*)f0->Get("Bkg_pt"),(TTree*)f1->Get("Bkg_pt"),(TTree*)f2->Get("Bkg_pt"),(TTree*)f3->Get("Bkg_pt"),(TTree*)f4->Get("Bkg_pt"),(TTree*)f5->Get("Bkg_pt"),(TTree*)f6->Get("Bkg_pt"),
+   TTree * ntpb_pt[22] = { (TTree*)f0->Get("Bkg_pt"),(TTree*)f1->Get("Bkg_pt"),(TTree*)f2->Get("Bkg_pt"),(TTree*)f3->Get("Bkg_pt"),(TTree*)f4->Get("Bkg_pt"),(TTree*)f5->Get("Bkg_pt"),(TTree*)f6->Get("Bkg_pt"),
                            (TTree*)f7->Get("Bkg_pt"),(TTree*)f8->Get("Bkg_pt"),(TTree*)f9->Get("Bkg_pt"),(TTree*)f10->Get("Bkg_pt"),
                            (TTree*)f11->Get("Bkg_pt"),(TTree*)f12->Get("Bkg_pt"),(TTree*)f13->Get("Bkg_pt"),
-                           (TTree*)f14->Get("Bkg_pt"),(TTree*)f15->Get("Bkg_pt"),
-                           (TTree*)f16->Get("Bkg_pt"),(TTree*)f17->Get("Bkg_pt"),(TTree*)f18->Get("Bkg_pt"),
-                           (TTree*)f19->Get("Bkg_pt"),
-                           (TTree*)f20->Get("Bkg_pt")
+                           (TTree*)f14->Get("Bkg_pt"),(TTree*)f15->Get("Bkg_pt"),(TTree*)f16->Get("Bkg_pt"),
+                           (TTree*)f17->Get("Bkg_pt"),(TTree*)f18->Get("Bkg_pt"),(TTree*)f19->Get("Bkg_pt"),
+                           (TTree*)f20->Get("Bkg_pt"),
+                           (TTree*)f21->Get("Bkg_pt")
                          };
 
 
    int nBProc = sizeof(ntpb)/sizeof(ntpb[0]);
    Float_t MyB_weight[nBProc],MyB_minvqq[nBProc],MyB_detaqq[nBProc],MyB_dphiqq[nBProc],MyB_btgb1_D[nBProc],MyB_btgb2_D[nBProc],MyB_qtgq1[nBProc],MyB_qtgq2[nBProc],MyB_NJ_ingap[nBProc],MyB_pt_All[nBProc],MyB_pz_All[nBProc],MyB_Njet_20[nBProc],MyB_HTT_rest_20[nBProc],MyB_E_rest_20[nBProc],MyB_minvbb[nBProc];
-   Float_t MyB_pt1[nBProc],MyB_pt2[nBProc];
+   Float_t MyB_pt1[nBProc],MyB_pt2[nBProc],MyB_pt3[nBProc];
 
    for(int k=0;k<nBProc;k++)
    {
@@ -122,6 +124,7 @@ void pt2()
 
     ntpb_pt[k]->SetBranchAddress( "PT1",                 &MyB_pt1[k] );
     ntpb_pt[k]->SetBranchAddress( "PT2",                 &MyB_pt2[k] );
+    ntpb_pt[k]->SetBranchAddress( "PT3",                 &MyB_pt3[k] );
    }
 //***************************************************************************************
   TFile *f = new TFile("PT2_Output.root","RECREATE");
@@ -166,13 +169,13 @@ void pt2()
       _PT2_Single_Top->Fill(MyB_pt2[k],MyB_weight[k]);
      else if(k>=11 && k<14)
       _PT2_tt->Fill(MyB_pt2[k],MyB_weight[k]);
-     else if(k>=14 && k<16)
+     else if(k>=14 && k<17)
       _PT2_WJets->Fill(MyB_pt2[k],MyB_weight[k]);
-     else if(k>=16 && k<19)
+     else if(k>=17 && k<20)
       _PT2_ZJets->Fill(MyB_pt2[k],MyB_weight[k]);
-     else if(k==19)
-      _PT2_DYJets->Fill(MyB_pt2[k],MyB_weight[k]);
      else if(k==20)
+      _PT2_DYJets->Fill(MyB_pt2[k],MyB_weight[k]);
+     else if(k==21)
       _PT2_DATA->Fill(MyB_pt2[k],MyB_weight[k]);
     }
 
@@ -202,5 +205,7 @@ void pt2()
   delete f17;
   delete f18;
   delete f19;
+  delete f20;
+  delete f21;
 }
 

@@ -39,11 +39,9 @@ int TMVAClassification( TString myMethodList = "" )
    dataloader->AddVariable( "btgb2_D",               "Btg_2b", "units", 'F' );
    dataloader->AddVariable( "qtgq1",                 "Qtg_1q", "units", 'F' );
    dataloader->AddVariable( "qtgq2",                 "Qtg_2q", "units", 'F' );
-//   dataloader->AddVariable( "NJ_ingap",              'I' );
    dataloader->AddVariable( "pt_All",                "Summ_PT", "units", 'F' );
    dataloader->AddVariable( "pz_All",                "Summ_PZ", "units", 'F' );
    dataloader->AddVariable( "Njet_20",                'I');
-//   dataloader->AddVariable( "HTT_rest_20",           "HTT_Rest_PTgt20", "units", 'F' );
    dataloader->AddVariable( "E_rest_20",           "E_Rest_PTgt20", "units", 'F' );
    dataloader->AddSpectator( "minvbb",               "MinvBB", "units", 'F' );
 
@@ -75,4 +73,3 @@ int TMVAClassification( TString myMethodList = "" )
 
    return 0;
 }
-//////////////

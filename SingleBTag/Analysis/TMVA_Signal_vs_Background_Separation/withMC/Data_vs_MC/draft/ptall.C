@@ -15,7 +15,7 @@
 #include "TMVA/Reader.h"
 #include "TMVA/MethodCuts.h"
 
-void pt3()
+void ptall()
 {
 
 // ***************************************************************************************************************
@@ -69,33 +69,34 @@ void pt3()
    TFile *f12 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_TTToHadronic_TuneCP5_.root");
    TFile *f13 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_TTToSemiLeptonic_TuneCP5_.root");
 //WJets
-   TFile *f14 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT400to600_TuneCP5_.root");
-   TFile *f15 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT600to800_TuneCP5_.root");
+   TFile *f14 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT400to600_qc19_3j_TuneCP5_.root");
+   TFile *f15 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT600to800_qc19_3j_TuneCP5_.root");
+   TFile *f16 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_WJetsToQQ_HT_800toInf_qc19_3j_TuneCP5_.root");
 //ZJets
-   TFile *f16 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT400to600_TuneCP5_.root");
-   TFile *f17 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT600to800_3j_TuneCP5_.root");
-   TFile *f18 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT_800toInf_TuneCP5_.root");
+   TFile *f17 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT400to600_qc19_4j_TuneCP5_.root");
+   TFile *f18 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT600to800_qc19_4j_TuneCP5_.root");
+   TFile *f19 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_ZJetsToQQ_HT_800toInf_qc19_4j_TuneCP5_.root");
 //DYJets_ToQQ
-   TFile *f19 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_DYJetsToQQ_HT180_.root");
+   TFile *f20 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/MC_Derived/NTuples_DYJetsToQQ_HT180_.root");
 // Full Data
-   TFile *f20 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/Data_Derived/NTuples_Full_Data_.root");
+   TFile *f21 = TFile::Open("../../../Making_Ntuples_For_SigBkgDiscrimination/Data_Derived/NTuples_Full_Data_.root");
 
-   TTree * ntpb[21]  =   { (TTree*)f0->Get("Bkg"),(TTree*)f1->Get("Bkg"),(TTree*)f2->Get("Bkg"),(TTree*)f3->Get("Bkg"),(TTree*)f4->Get("Bkg"),(TTree*)f5->Get("Bkg"),(TTree*)f6->Get("Bkg"),
-                           (TTree*)f7->Get("Bkg"),(TTree*)f8->Get("Bkg"),(TTree*)f9->Get("Bkg"),(TTree*)f10->Get("Bkg"),
-                           (TTree*)f11->Get("Bkg"),(TTree*)f12->Get("Bkg"),(TTree*)f13->Get("Bkg"),
-                           (TTree*)f14->Get("Bkg"),(TTree*)f15->Get("Bkg"),
-                           (TTree*)f16->Get("Bkg"),(TTree*)f17->Get("Bkg"),(TTree*)f18->Get("Bkg"),
-                           (TTree*)f19->Get("Bkg"),
-                           (TTree*)f20->Get("Bkg")
-                         };
+   TTree * ntpb[22] = { (TTree*)f0->Get("Bkg"),(TTree*)f1->Get("Bkg"),(TTree*)f2->Get("Bkg"),(TTree*)f3->Get("Bkg"),(TTree*)f4->Get("Bkg"),(TTree*)f5->Get("Bkg"),(TTree*)f6->Get("Bkg"),
+                        (TTree*)f7->Get("Bkg"),(TTree*)f8->Get("Bkg"),(TTree*)f9->Get("Bkg"),(TTree*)f10->Get("Bkg"),
+                        (TTree*)f11->Get("Bkg"),(TTree*)f12->Get("Bkg"),(TTree*)f13->Get("Bkg"),
+                        (TTree*)f14->Get("Bkg"),(TTree*)f15->Get("Bkg"),(TTree*)f16->Get("Bkg"),
+                        (TTree*)f17->Get("Bkg"),(TTree*)f18->Get("Bkg"),(TTree*)f19->Get("Bkg"),
+                        (TTree*)f20->Get("Bkg"),
+                        (TTree*)f21->Get("Bkg")
+                      };
 
-   TTree * ntpb_pt[21] = { (TTree*)f0->Get("Bkg_pt"),(TTree*)f1->Get("Bkg_pt"),(TTree*)f2->Get("Bkg_pt"),(TTree*)f3->Get("Bkg_pt"),(TTree*)f4->Get("Bkg_pt"),(TTree*)f5->Get("Bkg_pt"),(TTree*)f6->Get("Bkg_pt"),
+   TTree * ntpb_pt[22] = { (TTree*)f0->Get("Bkg_pt"),(TTree*)f1->Get("Bkg_pt"),(TTree*)f2->Get("Bkg_pt"),(TTree*)f3->Get("Bkg_pt"),(TTree*)f4->Get("Bkg_pt"),(TTree*)f5->Get("Bkg_pt"),(TTree*)f6->Get("Bkg_pt"),
                            (TTree*)f7->Get("Bkg_pt"),(TTree*)f8->Get("Bkg_pt"),(TTree*)f9->Get("Bkg_pt"),(TTree*)f10->Get("Bkg_pt"),
                            (TTree*)f11->Get("Bkg_pt"),(TTree*)f12->Get("Bkg_pt"),(TTree*)f13->Get("Bkg_pt"),
-                           (TTree*)f14->Get("Bkg_pt"),(TTree*)f15->Get("Bkg_pt"),
-                           (TTree*)f16->Get("Bkg_pt"),(TTree*)f17->Get("Bkg_pt"),(TTree*)f18->Get("Bkg_pt"),
-                           (TTree*)f19->Get("Bkg_pt"),
-                           (TTree*)f20->Get("Bkg_pt")
+                           (TTree*)f14->Get("Bkg_pt"),(TTree*)f15->Get("Bkg_pt"),(TTree*)f16->Get("Bkg_pt"),
+                           (TTree*)f17->Get("Bkg_pt"),(TTree*)f18->Get("Bkg_pt"),(TTree*)f19->Get("Bkg_pt"),
+                           (TTree*)f20->Get("Bkg_pt"),
+                           (TTree*)f21->Get("Bkg_pt")
                          };
 
 
@@ -126,24 +127,24 @@ void pt3()
     ntpb_pt[k]->SetBranchAddress( "PT3",                 &MyB_pt3[k] );
    }
 //***************************************************************************************
-  TFile *f = new TFile("PT3_Output.root","RECREATE");
+  TFile *f = new TFile("PTALL_Output.root","RECREATE");
   gStyle->SetOptFile(0);
   gStyle->SetOptStat("mre");
   gStyle->SetPaintTextFormat("1.2e");
 
-  int nbin=50;
-  double xmin=60;
-  double xmax=300;
+  int nbin=100;
+  double xmin=0;
+  double xmax=1000;
 
-  TH1D * _PT3_VBF_Hbb  = new TH1D("PT3_VBF_Hbb","PT3_VBF_Hbb",nbin,xmin,xmax);
-  TH1D * _PT3_ggF_Hbb  = new TH1D("PT3_ggF_Hbb","PT3_ggF_Hbb",nbin,xmin,xmax);
-  TH1D * _PT3_QCD  = new TH1D("PT3_QCD","PT3_QCD",nbin,xmin,xmax);
-  TH1D * _PT3_Single_Top  = new TH1D("PT3_Single_Top","PT3_Single_Top",nbin,xmin,xmax);
-  TH1D * _PT3_tt  = new TH1D("PT3_tt","PT3_tt",nbin,xmin,xmax);
-  TH1D * _PT3_WJets  = new TH1D("PT3_WJets","PT3_WJets",nbin,xmin,xmax);
-  TH1D * _PT3_ZJets  = new TH1D("PT3_ZJets","PT3_ZJets",nbin,xmin,xmax);
-  TH1D * _PT3_DYJets = new TH1D("PT3_DYJets","PT3_DYJets",nbin,xmin,xmax);
-  TH1D * _PT3_DATA   = new TH1D("PT3_DATA","PT3_DATA",nbin,xmin,xmax);
+  TH1D * _PTALL_VBF_Hbb  = new TH1D("PTALL_VBF_Hbb","PTALL_VBF_Hbb",nbin,xmin,xmax);
+  TH1D * _PTALL_ggF_Hbb  = new TH1D("PTALL_ggF_Hbb","PTALL_ggF_Hbb",nbin,xmin,xmax);
+  TH1D * _PTALL_QCD  = new TH1D("PTALL_QCD","PTALL_QCD",nbin,xmin,xmax);
+  TH1D * _PTALL_Single_Top  = new TH1D("PTALL_Single_Top","PTALL_Single_Top",nbin,xmin,xmax);
+  TH1D * _PTALL_tt  = new TH1D("PTALL_tt","PTALL_tt",nbin,xmin,xmax);
+  TH1D * _PTALL_WJets  = new TH1D("PTALL_WJets","PTALL_WJets",nbin,xmin,xmax);
+  TH1D * _PTALL_ZJets  = new TH1D("PTALL_ZJets","PTALL_ZJets",nbin,xmin,xmax);
+  TH1D * _PTALL_DYJets = new TH1D("PTALL_DYJets","PTALL_DYJets",nbin,xmin,xmax);
+  TH1D * _PTALL_DATA   = new TH1D("PTALL_DATA","PTALL_DATA",nbin,xmin,xmax);
 //***************************************************************************************
 
   for(int k=0;k<nSProc;k++)
@@ -152,9 +153,9 @@ void pt3()
      ntps[k]    -> GetEntry(i);
      ntps_pt[k] -> GetEntry(i);
      if(k==0)
-      _PT3_VBF_Hbb->Fill(MyS_pt3[k],MyS_weight[k]);
+      _PTALL_VBF_Hbb->Fill(MyS_pt_All[k],MyS_weight[k]);
      if(k==1)
-      _PT3_ggF_Hbb->Fill(MyS_pt3[k],MyS_weight[k]);
+      _PTALL_ggF_Hbb->Fill(MyS_pt_All[k],MyS_weight[k]);
     }
 
   for(int k=0;k<nBProc;k++)
@@ -163,19 +164,19 @@ void pt3()
      ntpb[k]    -> GetEntry(i);
      ntpb_pt[k] -> GetEntry(i);
      if(k<7)
-      _PT3_QCD->Fill(MyB_pt3[k],MyB_weight[k]);
+      _PTALL_QCD->Fill(MyB_pt_All[k],MyB_weight[k]);
      else if(k>=7 && k<11)
-      _PT3_Single_Top->Fill(MyB_pt3[k],MyB_weight[k]);
+      _PTALL_Single_Top->Fill(MyB_pt_All[k],MyB_weight[k]);
      else if(k>=11 && k<14)
-      _PT3_tt->Fill(MyB_pt3[k],MyB_weight[k]);
-     else if(k>=14 && k<16)
-      _PT3_WJets->Fill(MyB_pt3[k],MyB_weight[k]);
-     else if(k>=16 && k<19)
-      _PT3_ZJets->Fill(MyB_pt3[k],MyB_weight[k]);
-     else if(k==19)
-      _PT3_DYJets->Fill(MyB_pt3[k],MyB_weight[k]);
+      _PTALL_tt->Fill(MyB_pt_All[k],MyB_weight[k]);
+     else if(k>=14 && k<17)
+      _PTALL_WJets->Fill(MyB_pt_All[k],MyB_weight[k]);
+     else if(k>=17 && k<20)
+      _PTALL_ZJets->Fill(MyB_pt_All[k],MyB_weight[k]);
      else if(k==20)
-      _PT3_DATA->Fill(MyB_pt3[k],MyB_weight[k]);
+      _PTALL_DYJets->Fill(MyB_pt_All[k],MyB_weight[k]);
+     else if(k==21)
+      _PTALL_DATA->Fill(MyB_pt_All[k],MyB_weight[k]);
     }
 
 
@@ -204,5 +205,7 @@ void pt3()
   delete f17;
   delete f18;
   delete f19;
+  delete f20;
+  delete f21;
 }
 
