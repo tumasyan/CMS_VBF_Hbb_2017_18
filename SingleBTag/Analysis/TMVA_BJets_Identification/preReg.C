@@ -25,61 +25,41 @@ void preReg()
 {
 
   TFile *f1 = new TFile("../../Preselected_NTuples/Training__VBFHToBB_M_125__.root");
-  TFile *f2 = new TFile("For_BB_MVA_Training.root");
-  double pi=3.14159265;
 
-//*************************************** True b-jets ***************************************
-  TTree *partb1 = (TTree*)f1->Get("Training/B_Jets_True_1");
-  TTree *partb2 = (TTree*)f1->Get("Training/B_Jets_True_2");
-  TTree *rec_b = (TTree*)f2->Get("bb");
+  TTree *bj1 = (TTree*)f1->Get("Training/B_Jets_True_1");
+  TTree *bj2 = (TTree*)f1->Get("Training/B_Jets_True_2");
+  TTree *bq = (TTree*)f1->Get("Training/bs");
 
-  Float_t ptb1_True;
-  Float_t ptb2_True;
-  Float_t pt_rec;
+  Float_t ptbj1;
+  Float_t ptbj2;
+  Float_t ptbq1;
+  Float_t ptbq2;
 
-  partb1->SetBranchAddress("bj1_pt",&ptb1_True);
-  partb2->SetBranchAddress("bj2_pt",&ptb2_True);
-  rec_b->SetBranchAddress("pt",&pt_rec);
+  bj1->SetBranchAddress("bj1_pt",&ptbj1);
+  bj2->SetBranchAddress("bj2_pt",&ptbj2);
+  bq->SetBranchAddress("b1_pt",&ptbq1);
+  bq->SetBranchAddress("b2_pt",&ptbq2);
  
-
   TFile *f = new TFile("preRegOut.root","RECREATE");
   gStyle->SetOptFile(0);
   gStyle->SetOptStat("mre");
   gStyle->SetPaintTextFormat("1.2e");
 
-  TNtuple * main = new TNtuple{"main","main","mc_pt"};
+  TNtuple * main = new TNtuple{"main","main","ptbj:ptbq"};
 
 //***************************************************************************************
 
 // ***********************************************************************************
 int i;
 
-
-
-
-for(i=0;i<partb1->GetEntries();i++)
+for(i=0;i<bj1->GetEntries();i++)
  {
-  partb1->GetEntry(i);
-  partb2->GetEntry(i);
-
-  main -> Fill(ptb1_True);
-  main -> Fill(ptb2_True);
+  bj1->GetEntry(i);
+  bj2->GetEntry(i);
+  bq->GetEntry(i);
+  main -> Fill(ptbj1, ptbq1);
+  main -> Fill(ptbj2, ptbq2);
  }
-
-
- TBranch *rec_pt = main->Branch("rec_pt",&pt_rec,"rec_pt");
-
- for(i=0;i<rec_b->GetEntries();i++)
- {
-  rec_b->GetEntry(i);
-  rec_pt -> Fill();
-  // rec_bb -> Fill(pt_rec);
-  // mc_bb->SetBranchAddress("rec_pt",&pt_rec);
- }
- 
-// cout<<rec_b->GetEntries()<<endl;
-
-// ******************************************************************************
 
   f->Write();
 }
