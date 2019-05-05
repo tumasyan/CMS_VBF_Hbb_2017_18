@@ -29,11 +29,9 @@ cd DoubleBTag/Analysis
      cd ../Making_Ntuples_For_SigBkgDiscrimination
    3.1 For data derived approach
      cd Data_Derived/
-     cp -r ../../TMVA_BJets_Identification/dataset .
      root -l Data_Derived.C
    3.2 For MC derived approach. This step also should be done in order to provide MC/Data comparison.
      cd MC_Derived/
-     cp -r ../../TMVA_BJets_Identification/dataset .
      root -l MC_Derived.C
 
 4. Signal vs Background discrimination using TMVA and final results
