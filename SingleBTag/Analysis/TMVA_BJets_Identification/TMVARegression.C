@@ -96,7 +96,12 @@ void TMVARegression( TString myMethodList = "" )
    // Define the input variables that shall be used for the MVA training
    // note that you may also use variable expressions, such as: "3*var1/var2*abs(var3)"
    // [all types of expressions that can also be parsed by TTree::Draw( "expression" )]
-   dataloader->AddVariable( "ptbj", "PTBJet", "units", 'F' );
+   dataloader->AddVariable( "ptbj", "PT", "units", 'F' );
+   dataloader->AddVariable( "ebj", "Energy", "units", 'F' );
+   dataloader->AddVariable( "etabj", "ETA", "units", 'F' );
+   dataloader->AddVariable( "btgbj", "BTAG", "units", 'F' );
+   dataloader->AddVariable( "btg_D_bj", "BTAG_D", "units", 'F' );
+   dataloader->AddVariable( "phibj", "PHI", "units", 'F' );
   // dataloader->AddVariable( "var2", "Variable 2", "units", 'F' );
 
    // You can add so-called "Spectator variables", which are not used in the MVA training,
