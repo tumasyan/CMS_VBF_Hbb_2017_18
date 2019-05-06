@@ -97,12 +97,12 @@ void TMVARegression( TString myMethodList = "" )
    // note that you may also use variable expressions, such as: "3*var1/var2*abs(var3)"
    // [all types of expressions that can also be parsed by TTree::Draw( "expression" )]
    dataloader->AddVariable( "ptbj", "PT", "units", 'F' );
-   dataloader->AddVariable( "ebj", "Energy", "units", 'F' );
-   dataloader->AddVariable( "etabj", "ETA", "units", 'F' );
-   dataloader->AddVariable( "btgbj", "BTAG", "units", 'F' );
-   dataloader->AddVariable( "btg_D_bj", "BTAG_D", "units", 'F' );
-   dataloader->AddVariable( "phibj", "PHI", "units", 'F' );
-  // dataloader->AddVariable( "var2", "Variable 2", "units", 'F' );
+//   dataloader->AddVariable( "ebj", "Energy", "units", 'F' );
+//   dataloader->AddVariable( "etabj", "ETA", "units", 'F' );
+//   dataloader->AddVariable( "btgbj", "BTAG", "units", 'F' );
+//   dataloader->AddVariable( "btg_D_bj", "BTAG_D", "units", 'F' );
+//   dataloader->AddVariable( "phibj", "PHI", "units", 'F' );
+// dataloader->AddVariable( "var2", "Variable 2", "units", 'F' );
 
    // You can add so-called "Spectator variables", which are not used in the MVA training,
    // but will appear in the final "TestTree" produced by TMVA. This TestTree will contain the
@@ -153,7 +153,7 @@ per tree can also be specified. The TTree object may be replaced by a TChain.
 
    // tell the DataLoader to use all remaining events in the trees after training for testing:
    dataloader->PrepareTrainingAndTestTree( mycut,
-                                         "nTrain_Regression=1000:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
+                                         "nTrain_Regression=0:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
    //
    //     dataloader->PrepareTrainingAndTestTree( mycut,
    //            "nTrain_Regression=0:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
