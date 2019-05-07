@@ -153,7 +153,7 @@ per tree can also be specified. The TTree object may be replaced by a TChain.
 
    // tell the DataLoader to use all remaining events in the trees after training for testing:
    dataloader->PrepareTrainingAndTestTree( mycut,
-                                         "nTrain_Regression=0:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
+                                         "nTrain_Regression=2000:nTest_Regression=2000:SplitMode=Random:NormMode=NumEvents:!V" );
    //
    //     dataloader->PrepareTrainingAndTestTree( mycut,
    //            "nTrain_Regression=0:nTest_Regression=0:SplitMode=Random:NormMode=NumEvents:!V" );
@@ -172,7 +172,7 @@ per tree can also be specified. The TTree object may be replaced by a TChain.
 
 
      factory->BookMethod( dataloader,  TMVA::Types::kBDT, "BDTG",
-                           "!H:!V:NTrees=2000::BoostType=Grad:Shrinkage=0.1:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=3:MaxDepth=4" );
+                           "!H:!V:NTrees=2000::BoostType=Grad:Shrinkage=0.1:UseBaggedBoost:BaggedSampleFraction=0.5:nCuts=20:MaxDepth=3:MaxDepth=4" ); //NTrees=2000
    // --------------------------------------------------------------------------------------------------
 
    // Now you can tell the factory to train, test, and evaluate the MVAs

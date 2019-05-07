@@ -94,8 +94,9 @@ void TMVARegressionApplication( TString myMethodList = "" )
    
    // Book output histograms
 
-   TH1* h = new TH1F( "BDTG", "BDTG method", 200, -100, 1200 );
-   TH1* h1 = new TH1F( "Pt_mult", "Pt_mult", 1000, -100, 2000 );
+   TH1* h = new TH1F( "BDTG", "BDTG method", 2000, -100, 1000 );
+   TH1* h1 = new TH1F( "Target Ptbq", "Target ptbq", 2000, -100, 1000 );
+   TH1* h2 = new TH1F( "Ptbj", "Ptbj", 2000, -100, 1000 );
    
    // Prepare input tree (this must be replaced by your data source)
    // in this example, there is a toy tree with signal and one with background events
@@ -119,17 +120,18 @@ void TMVARegressionApplication( TString myMethodList = "" )
    // - you can use the same variables as above which is slightly faster,
    //   but of course you can use different ones and copy the values inside the event loop
    //
-   TTree* theTree = (TTree*)input->Get("main");
-   std::cout << "--- Select signal sample" << std::endl;
-   theTree->SetBranchAddress( "ptbj", &ptbj );
-   // theTree->SetBranchAddress( "var2", &var2 );
+    TTree* theTree = (TTree*)input->Get("main");
+    std::cout << "--- Select signal sample" << std::endl;
+    Float_t ptbq;
+    theTree->SetBranchAddress( "ptbj", &ptbj );
+    theTree->SetBranchAddress( "ptbq", &ptbq );
 
    std::cout << "--- Processing: " << theTree->GetEntries() << " events" << std::endl;
    TStopwatch sw;
    sw.Start();
-   for (Long64_t ievt=0; ievt<theTree->GetEntries();ievt++) {
+   for (Long64_t ievt=0; ievt<theTree->GetEntries(); ievt++) {
 
-      if (ievt%1000 == 0) {
+      if (ievt%5000 == 0) {
          std::cout << "--- ... Processing event: " << ievt << std::endl;
       }
 
@@ -141,9 +143,10 @@ void TMVARegressionApplication( TString myMethodList = "" )
      
          Float_t val = (reader->EvaluateRegression("BDTG method"))[0];
          // cout<<"regValue: "<<val<<endl;
-         Float_t True_pt = val*ptbj;
-         h->Fill( val); 
-         h1->Fill( True_pt); 
+//         Float_t True_pt = val*ptbj;
+         h->Fill(val); 
+         h1->Fill(ptbq);
+         h2->Fill(ptbj);
    }
    sw.Stop();
    std::cout << "--- End of event loop: "; sw.Print();
@@ -153,6 +156,7 @@ void TMVARegressionApplication( TString myMethodList = "" )
    TFile *target  = new TFile( "TMVARegApp.root","RECREATE" );
    h->Write();
    h1->Write();
+   h2->Write();
 
    target->Close();
 
