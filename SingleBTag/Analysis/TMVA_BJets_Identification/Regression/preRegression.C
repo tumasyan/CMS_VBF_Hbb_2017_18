@@ -21,7 +21,7 @@
 }
 
 
-void preReg()
+void preRegression()
 {
 
   TFile *f1 = new TFile("../../../Preselected_NTuples/Training__VBFHToBB_M_125__.root");
@@ -69,23 +69,18 @@ void preReg()
 
   TNtuple * main = new TNtuple{"main","main","ptbq:ptbj:ebj:etabj:btgbj:btg_D_bj:phibj"};
 
-//***************************************************************************************
-
-// ***********************************************************************************
-int i;
-
-for(i=0;i<bj1->GetEntries();i++)
- {
-  bj1->GetEntry(i);
-  bj2->GetEntry(i);
-  bq->GetEntry(i);
+for(int i=0; i < bj1->GetEntries(); i++)
+{
+    bj1->GetEntry(i);
+    bj2->GetEntry(i);
+    bq->GetEntry(i);
     if (ptbj1 > 20)
-  main -> Fill(ptbq1, ptbj1, ebj1, etabj1, btgbj1, btg_D_bj1, phibj1);
+        main -> Fill(ptbq1, ptbj1, ebj1, etabj1, btgbj1, btg_D_bj1, phibj1);
     if (ptbj2 > 20)
-  main -> Fill(ptbq2, ptbj2, ebj2, etabj2, btgbj2, btg_D_bj2, phibj2);
- }
+        main -> Fill(ptbq2, ptbj2, ebj2, etabj2, btgbj2, btg_D_bj2, phibj2);
+}
+f->Write();
 
-  f->Write();
 }
 
 
