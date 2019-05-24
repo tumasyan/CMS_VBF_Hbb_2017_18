@@ -1,0 +1,25 @@
+imax 1
+jmax *
+kmax *
+----------------------------------------------------------------------------------------------------
+shapes          qcd             *   data_singleb_shapes.root     w:qcd_$CHANNEL
+shapes          data_obs        *   data_singleb_shapes.root     w:data_$CHANNEL
+shapes          qqH_hbb         *   signal_singleb_shapes.root   w:sig_$CHANNEL
+shapes          ggH_hbb         *   signal_singleb_shapes.root   w:sig_$CHANNEL
+----------------------------------------------------------------------------------------------------
+bin             CAT5
+observation   -1
+----------------------------------------------------------------------------------------------------
+bin             CAT5 CAT5 CAT5
+process          ggH_hbb   qqH_hbb   qcd
+process            -1         0       1 
+rate            34.2175  32.4713 30426
+----------------------------------------------------------------------------------------------------
+CMS_ggH_sys       lnN  1.15   -      -
+CMS_qqH_sys       lnN   -    1.15    -
+CMS_sig_corrsys   lnN  1.20  1.10    -
+----------------------------------------------------------------------------------------------------
+CMS_vbfbb_scale_mbb_13TeV_2018  param 1.0 0.015
+CMS_vbfbb_res_mbb_13TeV_2018    param 1.0 0.035
+mean_sig_CAT5     param 118.074 2.37183
+sigma_sig_CAT5    param 16.527 1.87031

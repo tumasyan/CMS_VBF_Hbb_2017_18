@@ -1,0 +1,93 @@
+INFO: (function: applyOptionsBase) FitterAlgoBase.cc: 112 -- Setting robust fit options to Tolerance=0.01 / Strategy=0 / Type,Algo=Minuit2,Migrad (note that defaults of CascadeMinimizer were taken where option not specified)
+INFO: (function: generateAsimov) ToyMCSamplerOpt.cc: 139 -- Using internal logic for binned/unbinned Asimov dataset generation
+INFO: (function: generateWithHisto) ToyMCSamplerOpt.cc: 214 -- Generating asimov with histogram for pdf pdf_binCAT7_obsOnly: in 1200 x-bins
+INFO: (function: run) Combine.cc: 902 -- Computing results starting from expected outcome (a-priori)
+INFO: (function: getNormalizations) FitDiagnostics.cc: 742 -- Generating toy data for evaluating per-bin uncertainties and covariances with post-fit nuisance parameters with 200 toys
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=-1
+DEBUG: (function: improveOnce) CascadeMinimizer.cc: 186 -- Minimization ended with latest status != 0 or 1
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=0
+INFO: (function: improveOnce) CascadeMinimizer.cc: 185 -- Minimization success! status=0
+INFO: (function: doFit) FitterAlgoBase.cc: 334 -- Running RobustFit for POI r. Configured with strategy 0  
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 505 -- Searching for crossing at nll = 0.214577 in the interval [ 1 , 14 ] 
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=0
+INFO: (function: improveOnce) CascadeMinimizer.cc: 185 -- Minimization success! status=0
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 535 -- x  +1.000004   y  -0.494473    step  +1.300000 [ START OF ITER 0, bound +14.000000 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  +2.300004   y  -0.034758   yCorr  -0.034758
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  +3.600004   y  +1.315868   yCorr  +1.315868
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 564 -- --------> accumulated big change in NLL, will go do minimize
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=0
+INFO: (function: improveOnce) CascadeMinimizer.cc: 185 -- Minimization success! status=0
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 609 x  +3.600004   y  +1.315868   yCorr  +1.315868   yProf   +0.425120   (P-U)  -0.890748    (P-C)  -0.890748    oldSlope  +0.000000    newSlope  +0.131767
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 643 -- ---> change search window to [ 3.6 , 1 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 535 -- x  +3.600004   y  +0.425120    step  -0.260000 [ START OF ITER 1, bound  +1.000004 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  +3.340004   y  +0.274575   yCorr  +0.265668
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  +3.080004   y  +0.153918   yCorr  +0.118288
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  +2.820004   y  +0.063397   yCorr  -0.016771
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 571 -- --------> found crossing
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  +2.950004   y  +0.104874   yCorr  +0.049203   [ bisection iter 0 in   +3.080004 in  +2.820004 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  +2.885004   y  +0.083188   yCorr  +0.015825   [ bisection iter 1 in   +2.950004 in  +2.820004 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  +2.852504   y  +0.073055   yCorr  -0.000571   [ bisection iter 2 in   +2.885004 in  +2.820004 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 590 -- --------> ending with x  +2.852504
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=0
+INFO: (function: improveOnce) CascadeMinimizer.cc: 185 -- Minimization success! status=0
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 609 x  +2.852504   y  +0.073055   yCorr  -0.000571   yProf   -0.000578   (P-U)  -0.073633    (P-C)  -0.000007    oldSlope  +0.131767    newSlope  +0.131781
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 505 -- Searching for crossing at nll = 0.214577 in the interval [ 1 , -14 ] 
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=0
+INFO: (function: improveOnce) CascadeMinimizer.cc: 185 -- Minimization success! status=0
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 535 -- x  +1.000004   y  -0.494473    step  -1.500000 [ START OF ITER 0, bound -14.000000 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -0.499996   y  +0.139306   yCorr  +0.139306
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 571 -- --------> found crossing
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  +0.250004   y  -0.337528   yCorr  -0.337528   [ bisection iter 0 in   +1.000004 in  -0.499996 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  -0.124996   y  -0.139669   yCorr  -0.139669   [ bisection iter 1 in   +0.250004 in  -0.499996 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  -0.312496   y  -0.010394   yCorr  -0.010394   [ bisection iter 2 in   -0.124996 in  -0.499996 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  -0.406246   y  +0.061894   yCorr  +0.061894   [ bisection iter 3 in   -0.312496 in  -0.499996 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  -0.359371   y  +0.025110   yCorr  +0.025110   [ bisection iter 4 in   -0.312496 in  -0.406246 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 590 -- --------> ending with x  -0.359371
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=0
+INFO: (function: improveOnce) CascadeMinimizer.cc: 185 -- Minimization success! status=0
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 609 x  -0.359371   y  +0.025110   yCorr  +0.025110   yProf   -0.191680   (P-U)  -0.216791    (P-C)  -0.216791    oldSlope  +0.000000    newSlope  +0.117317
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 633 -- ---> change search window to [ -0.359371 , -14 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 535 -- x  -0.359371   y  -0.191680    step  -1.364063 [ START OF ITER 1, bound -14.000000 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -1.723434   y  +0.946825   yCorr  +0.728536
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 564 -- --------> accumulated big change in NLL, will go do minimize
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=0
+INFO: (function: improveOnce) CascadeMinimizer.cc: 185 -- Minimization success! status=0
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 609 x  -1.723434   y  +0.946825   yCorr  +0.728536   yProf   +0.675321   (P-U)  -0.271504    (P-C)  -0.053216    oldSlope  +0.117317    newSlope  +0.145917
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 643 -- ---> change search window to [ -1.72343 , -0.359371 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 535 -- x  -1.723434   y  +0.675321    step  +0.136406 [ START OF ITER 2, bound  -0.359371 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -1.587028   y  +0.570378   yCorr  +0.567663
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -1.450621   y  +0.475157   yCorr  +0.464297
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -1.314215   y  +0.389610   yCorr  +0.365174
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -1.177809   y  +0.313690   yCorr  +0.270249
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -1.041402   y  +0.247351   yCorr  +0.179475
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -0.904996   y  +0.190546   yCorr  +0.092805
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -0.768590   y  +0.143231   yCorr  +0.010194
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -0.632184   y  +0.105359   yCorr  -0.068404
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 564 -- --------> accumulated big change in NLL, will go do minimize
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=0
+INFO: (function: improveOnce) CascadeMinimizer.cc: 185 -- Minimization success! status=0
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 609 x  -0.632184   y  +0.105359   yCorr  -0.068404   yProf   -0.059351   (P-U)  -0.164710    (P-C)  +0.009053    oldSlope  +0.145917    newSlope  +0.138315
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 643 -- ---> change search window to [ -0.632184 , -1.72343 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 535 -- x  -0.632184   y  -0.059351    step  -0.109125 [ START OF ITER 3, bound  -1.723434 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -0.741309   y  +0.001388   yCorr  -0.000259
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 558 -- x  -0.850434   y  +0.068818   yCorr  +0.062230
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 571 -- --------> found crossing
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  -0.795871   y  +0.034265   yCorr  +0.030559   [ bisection iter 0 in   -0.741309 in  -0.850434 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  -0.768590   y  +0.017618   yCorr  +0.015044   [ bisection iter 1 in   -0.741309 in  -0.795871 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 579 -- x  -0.754949   y  +0.009451   yCorr  +0.007366   [ bisection iter 2 in   -0.741309 in  -0.768590 ]
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 590 -- --------> ending with x  -0.754949
+INFO: (function: improveOnce) CascadeMinimizer.cc: 157 -- Minimisation configured with Type=Minuit2, Algo=Migrad, strategy=1, tolerance=0.01
+INFO: (function: improveOnce) CascadeMinimizer.cc: 180 -- Minimisation finished with status=0
+INFO: (function: improveOnce) CascadeMinimizer.cc: 185 -- Minimization success! status=0
+INFO: (function: findCrossingNew) FitterAlgoBase.cc: 609 x  -0.754949   y  +0.009451   yCorr  +0.007366   yProf   +0.007442   (P-U)  -0.002009    (P-C)  +0.000075    oldSlope  +0.138315    newSlope  +0.133306
+DEBUG: (function: runSpecific) FitDiagnostics.cc: 380 -- Fit S+B, status = 0, numBadNLL = 0, covariance quality = 3
+INFO: (function: getNormalizations) FitDiagnostics.cc: 742 -- Generating toy data for evaluating per-bin uncertainties and covariances with post-fit nuisance parameters with 200 toys

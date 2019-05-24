@@ -1,0 +1,90 @@
+imax 4
+jmax *
+kmax *
+----------------------------------------------------------------------------------------------------
+shapes          qcd             *   ../root/data_shapes_workspace.root     w:qcd_model_POL4POL3_$CHANNEL 
+shapes          data_obs        *   ../root/data_shapes_workspace.root     w:data_hist_$CHANNEL          
+shapes          top             *   ../root/data_shapes_workspace.root     w:Top_model_$CHANNEL          
+shapes          zjets           *   ../root/data_shapes_workspace.root     w:Z_model_$CHANNEL            
+shapes          qqH_hbb         *   ../root/sig_shapes_workspace.root      w:signal_model_m125_$CHANNEL  
+shapes          ggH_hbb         *   ../root/sig_shapes_workspace.root      w:signal_model_m125_$CHANNEL  
+----------------------------------------------------------------------------------------------------
+bin            CAT0      CAT1      CAT2      CAT3      
+observation    -1        -1        -1        -1        
+----------------------------------------------------------------------------------------------------
+bin            CAT0    CAT0    CAT0    CAT0    CAT0    CAT1    CAT1    CAT1    CAT1    CAT1    CAT2    CAT2    CAT2    CAT2    CAT2    CAT3    CAT3    CAT3    CAT3    CAT3    
+process        qqH_hbb ggH_hbb qcd     top     zjets   qqH_hbb ggH_hbb qcd     top     zjets   qqH_hbb ggH_hbb qcd     top     zjets   qqH_hbb ggH_hbb qcd     top     zjets   
+process        0       -1      1       1       1       0       -1      1       1       1       0       -1      1       1       1       0       -1      1       1       1       
+rate           216.67     654.49     4714266    78395.01   35679.42   294.95     274.10     1030719    15841.61   8085.44    188.41     79.83      229935     2379.80    1766.17    88.03      18.49      43450      330.75     309.47     
+----------------------------------------------------------------------------------------------------
+BR_hbb                    lnN     1.0126     1.0126     -          -          -         1.0126     1.0126     -          -          -         1.0126     1.0126     -          -          -         1.0126     1.0126     -          -          -         
+QCDscale_qqH              lnN     1.004      -          -          -          -         1.004      -          -          -          -         1.004      -          -          -          -         1.004      -          -          -          -         
+QCDscale_ggH              lnN     -          1.08       -          -          -         -          1.08       -          -          -         -          1.08       -          -          -         -          1.08       -          -          -         
+pdf_Higgs_qqbar           lnN     1.021      -          -          -          -         1.021      -          -          -          -         1.021      -          -          -          -         1.021      -          -          -          -         
+pdf_Higgs_gg              lnN     -          1.03       -          -          -         -          1.03       -          -          -         -          1.03       -          -          -         -          1.03       -          -          -         
+lumi_13TeV_2016           lnN     1.025      1.025      -          -          -         1.025      1.025      -          -          -         1.025      1.025      -          -          -         1.025      1.025      -          -          -         
+QGL_vbfbb                 lnN     0.93421    0.92005    -          -          -         0.93421    0.92005    -          -          -         0.93421    0.92005    -          -          -         0.93421    0.92005    -          -          -         
+CMS_scale_j_ACCEPT_13TeV  lnN     1.0532     1.06381    -          -          -         1.0532     1.06381    -          -          -         1.0532     1.06381    -          -          -         1.0532     1.06381    -          -          -         
+CMS_res_j_ACCEPT_13TeV    lnN     1.0027     1.00643    -          -          -         1.0027     1.00643    -          -          -         1.0027     1.00643    -          -          -         1.0027     1.00643    -          -          -         
+CMS_qqH_hbb_trigger_13TeV lnN     1.05515    1.06455    -          -          -         1.05515    1.06455    -          -          -         1.05515    1.06455    -          -          -         1.05515    1.06455    -          -          -         
+UE                        lnN     0.959      -          -          -          -         0.959      -          -          -          -         0.959      -          -          -          -         0.959      -          -          -          -         
+PS                        lnN     0.92       0.971      -          -          -         0.92       0.971      -          -          -         0.92       0.971      -          -          -         0.92       0.971      -          -          -         
+QCDscale_qqH_ACCEPT       lnN     1.01       -          -          -          -         1.01       -          -          -          -         1.01       -          -          -          -         1.01       -          -          -          -         
+QCDscale_ggH_ACCEPT       lnN     -          0.843      -          -          -         -          0.843      -          -          -         -          0.843      -          -          -         -          0.843      -          -          -         
+pdf_qqH_ACCEPT            lnN     1.004      -          -          -          -         1.004      -          -          -          -         1.004      -          -          -          -         1.004      -          -          -          -         
+pdf_ggH_ACCEPT            lnN     -          1.009      -          -          -         -          1.009      -          -          -         -          1.009      -          -          -         -          1.009      -          -          -         
+CMS_vbfbb_pu_unc_13TeV    lnN     0.996      0.997      -          -          -         0.996      0.997      -          -          -         0.996      0.997      -          -          -         0.996      0.997      -          -          -         
+CMS_vbfbb_bTagJES_13TeV   lnN     0.99983    0.99873    -          -          -         0.99983    0.99873    -          -          -         0.99983    0.99873    -          -          -         0.99983    0.99873    -          -          -         
+CMS_vbfbb_bTagLF_13TeV    lnN     1.03142    1.03103    -          -          -         1.03142    1.03103    -          -          -         1.03142    1.03103    -          -          -         1.03142    1.03103    -          -          -         
+CMS_vbfbb_bTagHF_13TeV    lnN     0.99964    0.9994     -          -          -         0.99964    0.9994     -          -          -         0.99964    0.9994     -          -          -         0.99964    0.9994     -          -          -         
+CMS_vbfbb_bTagLFStats1_13TeV lnN     0.99992    0.99989    -          -          -         0.99992    0.99989    -          -          -         0.99992    0.99989    -          -          -         0.99992    0.99989    -          -          -         
+CMS_vbfbb_bTagLFStats2_13TeV lnN     1.00004    1.00006    -          -          -         1.00004    1.00006    -          -          -         1.00004    1.00006    -          -          -         1.00004    1.00006    -          -          -         
+CMS_vbfbb_bTagHFStats1_13TeV lnN     0.99056    0.99106    -          -          -         0.99056    0.99106    -          -          -         0.99056    0.99106    -          -          -         0.99056    0.99106    -          -          -         
+CMS_vbfbb_bTagHFStats2_13TeV lnN     1.00145    1.001      -          -          -         1.00145    1.001      -          -          -         1.00145    1.001      -          -          -         1.00145    1.001      -          -          -         
+CMS_vbfbb_bTagCErr1_13TeV lnN     0.99908    0.99877    -          -          -         0.99908    0.99877    -          -          -         0.99908    0.99877    -          -          -         0.99908    0.99877    -          -          -         
+CMS_vbfbb_bTagCErr2_13TeV lnN     1.00011    1.0002     -          -          -         1.00011    1.0002     -          -          -         1.00011    1.0002     -          -          -         1.00011    1.0002     -          -          -         
+----------------------------------------------------------------------------------------------------
+CMS_vbfbb_qcd_norm_CAT0_13TeV lnU     -          -          1.5        -          -         -          -          -          -          -         -          -          -          -          -         -          -          -          -          -         
+CMS_vbfbb_qcd_norm_CAT1_13TeV lnU     -          -          -          -          -         -          -          1.5        -          -         -          -          -          -          -         -          -          -          -          -         
+CMS_vbfbb_qcd_norm_CAT2_13TeV lnU     -          -          -          -          -         -          -          -          -          -         -          -          1.5        -          -         -          -          -          -          -         
+CMS_vbfbb_qcd_norm_CAT3_13TeV lnU     -          -          -          -          -         -          -          -          -          -         -          -          -          -          -         -          -          1.5        -          -         
+----------------------------------------------------------------------------------------------------
+CMS_vbfbb_zjets_norm_CAT0_13TeV lnN     -          -          -          -          1.3       -          -          -          -          -         -          -          -          -          -         -          -          -          -          -         
+CMS_vbfbb_zjets_norm_CAT1_13TeV lnN     -          -          -          -          -         -          -          -          -          1.3       -          -          -          -          -         -          -          -          -          -         
+CMS_vbfbb_zjets_norm_CAT2_13TeV lnN     -          -          -          -          -         -          -          -          -          -         -          -          -          -          1.3       -          -          -          -          -         
+CMS_vbfbb_zjets_norm_CAT3_13TeV lnN     -          -          -          -          -         -          -          -          -          -         -          -          -          -          -         -          -          -          -          1.3       
+CMS_vbfbb_top_norm_CAT0_13TeV lnN     -          -          -          1.3        -         -          -          -          -          -         -          -          -          -          -         -          -          -          -          -         
+CMS_vbfbb_top_norm_CAT1_13TeV lnN     -          -          -          -          -         -          -          -          1.3        -         -          -          -          -          -         -          -          -          -          -         
+CMS_vbfbb_top_norm_CAT2_13TeV lnN     -          -          -          -          -         -          -          -          -          -         -          -          -          1.3        -         -          -          -          -          -         
+CMS_vbfbb_top_norm_CAT3_13TeV lnN     -          -          -          -          -         -          -          -          -          -         -          -          -          -          -         -          -          -          1.3        -         
+----------------------------------------------------------------------------------------------------
+CMS_vbfbb_scale_mbb_selsingle_13TeV_2016 param            1.0     0.015
+CMS_vbfbb_scale_mbb_seldouble_13TeV_2016 param            1.0     0.015
+CMS_vbfbb_res_mbb_selsingle_13TeV_2016 param            1.0     0.035
+CMS_vbfbb_res_mbb_seldouble_13TeV_2016 param            1.0     0.035
+
+----------------------------------------------------------------------------------------------------
+mean_m125_CAT0_13TeV_2016      param        124.354  0.200545
+mean_m125_CAT1_13TeV_2016      param        124.535  0.149044
+mean_m125_CAT2_13TeV_2016      param        124.671 0.00896216
+mean_m125_CAT3_13TeV_2016      param        124.624   0.21237
+sigma_m125_CAT0_13TeV_2016     param        13.1615   0.24712
+sigma_m125_CAT1_13TeV_2016     param        13.1699  0.140451
+sigma_m125_CAT2_13TeV_2016     param        13.1366 0.00727176
+sigma_m125_CAT3_13TeV_2016     param        13.1926  0.122393
+Top_mean_CAT0_13TeV_2016       param         130.62    1.3062
+Top_mean_CAT1_13TeV_2016       param        139.176   1.39176
+Top_mean_CAT2_13TeV_2016       param        144.681   1.44681
+Top_mean_CAT3_13TeV_2016       param        153.383   1.53383
+Top_sigma_CAT0_13TeV_2016      param        60.3018   3.01509
+Top_sigma_CAT1_13TeV_2016      param         61.166    3.0583
+Top_sigma_CAT2_13TeV_2016      param        61.9678   3.09839
+Top_sigma_CAT3_13TeV_2016      param        72.9149   3.64575
+Z_mean_CAT0_13TeV_2016         param        94.6724 0.0133991
+Z_mean_CAT1_13TeV_2016         param        94.1087  0.318449
+Z_mean_CAT2_13TeV_2016         param        91.9305  0.659333
+Z_mean_CAT3_13TeV_2016         param        96.1276   1.17463
+Z_sigma_CAT0_13TeV_2016        param        12.0853 0.0163644
+Z_sigma_CAT1_13TeV_2016        param        10.7723   0.36007
+Z_sigma_CAT2_13TeV_2016        param        9.80997  0.812833
+Z_sigma_CAT3_13TeV_2016        param        9.84798   1.23841

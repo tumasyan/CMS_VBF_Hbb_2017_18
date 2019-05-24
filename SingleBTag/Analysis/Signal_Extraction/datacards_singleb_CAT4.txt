@@ -1,0 +1,25 @@
+imax 1
+jmax *
+kmax *
+----------------------------------------------------------------------------------------------------
+shapes          qcd             *   data_singleb_shapes.root     w:qcd_$CHANNEL
+shapes          data_obs        *   data_singleb_shapes.root     w:data_$CHANNEL
+shapes          qqH_hbb         *   signal_singleb_shapes.root   w:sig_$CHANNEL
+shapes          ggH_hbb         *   signal_singleb_shapes.root   w:sig_$CHANNEL
+----------------------------------------------------------------------------------------------------
+bin             CAT4
+observation   -1
+----------------------------------------------------------------------------------------------------
+bin             CAT4 CAT4 CAT4
+process          ggH_hbb   qqH_hbb   qcd
+process            -1         0       1 
+rate            72.4883  36.9982 260195
+----------------------------------------------------------------------------------------------------
+CMS_ggH_sys       lnN  1.15   -      -
+CMS_qqH_sys       lnN   -    1.15    -
+CMS_sig_corrsys   lnN  1.20  1.10    -
+----------------------------------------------------------------------------------------------------
+CMS_vbfbb_scale_mbb_13TeV_2018  param 1.0 0.015
+CMS_vbfbb_res_mbb_13TeV_2018    param 1.0 0.035
+mean_sig_CAT4     param 116.36 2.28976
+sigma_sig_CAT4    param 21.6603 1.80892

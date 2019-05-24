@@ -1,0 +1,73 @@
+#include "HttStylesNew.cc"
+#include "Common.h"
+void CreateDataTemplates(int iCAT=1, 
+			 int iORDER=6) {
+
+  for (int i=0; i<5; ++i) 
+    names[i] = "singleb_" + names[i];
+
+  using namespace RooFit;
+
+  SetStyle();
+
+  TFile * file = new TFile("Full_Data_stat.root");
+  TTree * tree = (TTree*)file->Get("Stat");
+
+  TString cutsBlind;
+  cutsBlind = cuts[iCAT] + "&&(mbb<100||mbb>150)";
+
+  TH1::SetDefaultSumw2(true);
+  TH1D * hist;
+  TH1D * histBlind;
+
+  TCanvas * dummy = new TCanvas("dummy","",800,700);
+  TString nameHist = "mbb_";
+  TString nameBlindHist = "mbb_blind";
+  hist = new TH1D(nameHist,"",120,80,200);
+  histBlind = new TH1D(nameBlindHist,"",120,80,200);
+  tree->Draw("mbb>>"+nameHist,cuts[iCAT]);
+  tree->Draw("mbb>>"+nameBlindHist,cutsBlind);
+  delete dummy;
+
+  RooRealVar mbb("mbb_"+names[iCAT],"mass(bb)",80,200);
+  RooRealVar b0("b0_"+names[iCAT],"b0",0,1);
+  RooRealVar b1("b1_"+names[iCAT],"b1",0,1);
+  RooRealVar b2("b2_"+names[iCAT],"b2",0,1);
+  RooRealVar b3("b3_"+names[iCAT],"b3",0,1);
+  RooRealVar b4("b4_"+names[iCAT],"b4",0,1);
+  RooRealVar b5("b5_"+names[iCAT],"b5",0,1);
+
+  RooArgList argList(b0,b1,b2);
+  if (iORDER>=4)
+    argList.add(b3);
+  if (iORDER>=5)
+    argList.add(b4);
+  if (iORDER>=6)
+    argList.add(b5);
+  
+  RooBernstein BRN("brn_"+names[iCAT],"Bernstein",mbb,argList);
+  RooDataHist data("data_"+names[iCAT],"data",mbb,hist);
+  RooDataHist dataBlind("dataBlind","data",mbb,histBlind);
+
+  RooFitResult * fitRes = BRN.fitTo(data);  
+  RooPlot* xframe = mbb.frame();
+  data.plotOn(xframe,LineColor(0),MarkerColor(0));
+  BRN.plotOn(xframe);
+  dataBlind.plotOn(xframe);
+
+  TCanvas * canv = new TCanvas("canv","",700,700);
+  xframe->Draw();
+  canv->Update();
+  canv->Print("data_"+names[iCAT]+".png");
+
+
+  TFile * fileOutput = new TFile("data_"+names[iCAT]+".root","recreate");
+  fileOutput->cd("");
+  RooWorkspace * w = new RooWorkspace("w","data");
+  w->import(BRN);
+  w->import(data);
+  w->Write("w");
+  fileOutput->Write();
+  fileOutput->Close();
+
+}

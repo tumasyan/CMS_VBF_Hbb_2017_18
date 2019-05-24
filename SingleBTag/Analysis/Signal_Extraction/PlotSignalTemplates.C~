@@ -1,0 +1,66 @@
+#include "HttStylesNew.cc"
+void CreateSignalTemplates(int iCAT=2) {
+
+  using namespace RooFit;
+
+  SetStyle();
+
+  TFile * fileGGH = new TFile("GluGluHToBB_M125_stat.root");
+  TFile * fileVBF = new TFile("VBFHToBB_M_125_stat.root");
+  
+  TTree * treeGGH = (TTree*)fileGGH->Get("Stat");
+  TTree * treeVBF = (TTree*)fileVBF->Get("Stat");
+
+  TString cuts[5] = {"bdt<0.1",
+		     "bdt>=0.1&&bdt<0.6",
+		     "bdt>=0.6&&bdt<0.8",
+		     "bdt>=0.8&&bdt<0.9",
+		     "bdt>=0.9"};
+
+  TH1::SetDefaultSumw2(true);
+
+  TH1D * histGGH[5];
+  TH1D * histVBF[5];
+  TString names[5] = {"CAT4","CAT5","CAT6","CAT7","CAT8"};
+  for (int i=0; i<5; ++i) 
+    names[i] = "singleb_" + names[i];
+
+
+  TCanvas * dummy = new TCanvas("dummy","",800,700);
+  for (int i=0; i<5; ++i) {
+    TString nameGGHHist = "mbb_ggh_"+names[i];
+    TString nameVBFHist = "mbb_vbf_"+names[i];
+    histGGH[i] = new TH1D(nameGGHHist,"",120,80,200);
+    histVBF[i] = new TH1D(nameVBFHist,"",120,80,200);
+    treeGGH->Draw("mbb>>"+nameGGHHist,"weight*("+cuts[i]+")");
+    treeVBF->Draw("mbb>>"+nameVBFHist,"weight*("+cuts[i]+")");
+    histVBF[i]->Add(histGGH[i],histVBF[i]);
+    InitHist(histGGH[i],"","",kCyan,1001);
+  }
+  delete dummy;
+
+  
+
+  RooRealVar mbb("mbb_"_names[i],"mass(bb)",80,200);
+
+  RooRealVar mean("mean","Mean",125,80,200);
+  RooRealVar sigma("sigma","Width",10,0,30);
+  RooRealVar alpha("alpha","Alpha",0.5,0,2.);
+  RooRealVar n("n","n",10,0,20);
+  
+  RooRealVar b0("b0","b0",0,1);
+  RooRealVar b1("b1","b1",0,1);
+  RooRealVar b2("b2","b2",0,1);
+  
+  RooRealVar fsig("frac","frac",0,1);
+  
+  RooBernstein BRN("Bernstein","Bernstein",mbb,RooArgList(b0,b1,b2));
+  RooCBShape cb("CBshape","CBshape",mbb,mean,sigma,alpha,n);
+  RooAddPdf signal("signal","signal",RooArgList(cb,BRN),frac);
+  
+  RooDataHist dataGGH("dataGGH","dataGGH",mbb,histGGH[iCAT]);
+  signal.fitTo(dataGGH,Save());
+  RooPlot * frame = mbb.frame();
+  
+
+}

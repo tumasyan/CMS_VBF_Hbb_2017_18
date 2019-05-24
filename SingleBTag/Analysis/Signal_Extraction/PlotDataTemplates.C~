@@ -1,0 +1,65 @@
+#include "HttStylesNew.cc"
+void CreateDataTemplates(int iCAT=1) {
+
+  using namespace RooFit;
+
+  SetStyle();
+
+  TFile * file = new TFile("Full_Data_stat.root");
+  TTree * tree = (TTree*)file->Get("Stat");
+
+  TString cuts[5] = {"bdt<0.1",
+		     "bdt>=0.1&&bdt<0.6",
+		     "bdt>=0.6&&bdt<0.8",
+		     "bdt>=0.8&&bdt<0.9",
+		     "bdt>=0.9"};
+
+  TString cutsBlind[5];
+  cutsBlind[0] = cuts[0];
+  for (int i=1; i<5; ++i) {
+    cutsBlind[i] = cuts[i] + "&&(mbb<100||mbb>150)";
+  }
+
+
+  TH1::SetDefaultSumw2(true);
+  TH1D * hist[5];
+  TH1D * histBlind[5];
+  TString names[5] = {"CAT4","CAT5","CAT6","CAT7","CAT8"};
+
+  TCanvas * dummy = new TCanvas("dummy","",800,700);
+  for (int i=0; i<5; ++i) {
+    TString nameHist = "mbb_"+names[i];
+    TString nameBlindHist = "mbb_blind_"+names[i];
+    hist[i] = new TH1D(nameHist,"",120,80,200);
+    histBlind[i] = new TH1D(nameBlindHist,"",120,80,200);
+    tree->Draw("mbb>>"+nameHist,cuts[i]);
+    tree->Draw("mbb>>"+nameBlindHist,cutsBlind[i]);
+  }
+  delete dummy;
+
+  RooRealVar mbb("mbb","mass(bb)",81,199);
+  RooRealVar b0("b0","b0",0,1);
+  RooRealVar b1("b1","b1",0,1);
+  RooRealVar b2("b2","b2",0,1);
+  RooRealVar b3("b3","b3",0,1);
+  RooRealVar b4("b4","b4",0,1);
+  RooRealVar b5("b5","b5",0,1);
+
+  RooBernstein * BRN;
+  if () ("Bernstein4","Bernstein",mbb,RooArgList(b0,b1,b2,b3,b4));
+
+  RooDataHist data("data","data",mbb,hist[iCAT]);
+  RooDataHist dataBlind("dataBlind","data",mbb,histBlind[iCAT]);
+
+  RooFitResult * fitRes = BRN.fitTo(data);  
+  RooPlot* xframe = mbb.frame();
+  data.plotOn(xframe,LineColor(0),MarkerColor(0));
+  BRN.plotOn(xframe);
+  dataBlind.plotOn(xframe);
+  xframe->Draw();
+  RooChi2Var chi2_lowstat("chi2_lowstat","chi2",BRN,data) ;
+  double ndof = 120 - 4;
+  double prob = TMath::Prob(chi2_lowstat.getVal(),ndof);
+  cout << "Chi2 = " << chi2_lowstat.getVal() << "  Prob = " << prob << endl; 
+
+}

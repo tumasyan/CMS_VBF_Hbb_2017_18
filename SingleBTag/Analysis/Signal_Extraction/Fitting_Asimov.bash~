@@ -1,0 +1,14 @@
+#!/bin/bash
+# $1 - workdir
+# $2 - catmin
+# $3 - catmax 
+# $4 - signal strength
+workdir=$1
+catmin=$2
+catmax=$3
+mu=$4
+cd ${workdir}/datacards
+combine -M FitDiagnostics  --X-rtd FITTER_NEVER_GIVE_UP --X-rtd FITTER_BOUND --X-rtd ADDNLL_RECURSIVE=0 --X-rtd FITTER_NEW_CROSSING_ALGO -t -1 --expectSignal=${mu} --robustFit 1 --rMin=-7 --rMax=7 --skipBOnlyFit -m 125 datacard_vbfHbb_names_m125_CAT${catmin}-CAT${catmax}_CATveto.txt --cminDefaultMinimizerTolerance 0.01 --saveNormalizations --saveShapes --saveWithUncertainties --saveNLL -v2
+mv fitDiagnostics.root mlfit_cat${catmin}-cat${catmax}_r${mu}.root
+mv higgsCombineTest.FitDiagnostics.mH125.root limit_cat${catmin}-cat${catmax}_r${mu}.root
+cd ../../
