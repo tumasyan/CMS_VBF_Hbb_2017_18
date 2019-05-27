@@ -21,5 +21,7 @@ CMS_sig_corrsys   lnN  1.20  1.10    -
 ----------------------------------------------------------------------------------------------------
 CMS_vbfbb_scale_mbb_13TeV_2018  param 1.0 0.015
 CMS_vbfbb_res_mbb_13TeV_2018    param 1.0 0.035
-mean_sig_CAT8     param 120.34 2.17904
-sigma_sig_CAT8    param 12.4332 1.71111
+mean_sig_CAT8     param 120.537 2.28367
+sigma_sig_CAT8    param 11.8624 1.91516
+bkgNorm_CAT8  rateParam  CAT8   qcd   1   [0.5,1.5]
+

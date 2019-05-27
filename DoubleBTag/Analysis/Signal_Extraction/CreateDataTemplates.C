@@ -71,13 +71,13 @@ void CreateDataTemplates() {
   TFile * file = new TFile("Full_Data_stat.root");
   TTree * tree = (TTree*)file->Get("Stat");
 
-  TFile * fileOutput = new TFile("data_singleb_shapes.root","recreate");
+  TFile * fileOutput = new TFile("data_doubleb_shapes.root","recreate");
   fileOutput->cd("");
   RooWorkspace * w = new RooWorkspace("w","data");
 
-  int iorder[5] = {6,5,4,4,4};
+  int iorder[4] = {5,4,4,4};
 
-  for (int i=0; i<5; ++i) 
+  for (int i=0; i<4; ++i) 
     CreatePDF(i,iorder[i],tree,w);
   
   w->Write("w");

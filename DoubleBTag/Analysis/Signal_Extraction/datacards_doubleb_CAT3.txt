@@ -2,18 +2,18 @@ imax 1
 jmax *
 kmax *
 ----------------------------------------------------------------------------------------------------
-shapes          qcd             *   data_singleb_shapes.root     w:qcd_$CHANNEL
-shapes          data_obs        *   data_singleb_shapes.root     w:data_$CHANNEL
-shapes          qqH_hbb         *   signal_singleb_shapes.root   w:sig_$CHANNEL
-shapes          ggH_hbb         *   signal_singleb_shapes.root   w:sig_$CHANNEL
+shapes          qcd             *   data_doubleb_shapes.root     w:qcd_$CHANNEL
+shapes          data_obs        *   data_doubleb_shapes.root     w:data_$CHANNEL
+shapes          qqH_hbb         *   signal_doubleb_shapes.root   w:sig_$CHANNEL
+shapes          ggH_hbb         *   signal_doubleb_shapes.root   w:sig_$CHANNEL
 ----------------------------------------------------------------------------------------------------
-bin             CAT4
+bin             CAT3
 observation   -1
 ----------------------------------------------------------------------------------------------------
-bin             CAT4 CAT4 CAT4
+bin             CAT3 CAT3 CAT3
 process          ggH_hbb   qqH_hbb   qcd
 process            -1         0       1 
-rate            72.4883  36.9982 260195
+rate            3.79062  11.5748 2163
 ----------------------------------------------------------------------------------------------------
 CMS_ggH_sys       lnN  1.15   -      -
 CMS_qqH_sys       lnN   -    1.15    -
@@ -21,7 +21,7 @@ CMS_sig_corrsys   lnN  1.20  1.10    -
 ----------------------------------------------------------------------------------------------------
 CMS_vbfbb_scale_mbb_13TeV_2018  param 1.0 0.015
 CMS_vbfbb_res_mbb_13TeV_2018    param 1.0 0.035
-mean_sig_CAT4     param 119.357 2.89242
-sigma_sig_CAT4    param 12.3218 2.51448
-bkgNorm_CAT4  rateParam  CAT4   qcd   1   [0.5,1.5]
+mean_sig_CAT3     param 121.935 3.53508
+sigma_sig_CAT3    param 10.6681 2.7692
+bkgNorm_CAT3   rateParam  CAT3   qcd   1   [0.5,1.5]
 

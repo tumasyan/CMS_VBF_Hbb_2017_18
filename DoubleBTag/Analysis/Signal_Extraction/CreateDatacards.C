@@ -4,12 +4,12 @@ void CreateDatacards() {
 
   using namespace RooFit;
 
-  TFile * file = new TFile("data_singleb_shapes.root");
-  TFile * fileSig = new TFile("signal_singleb_shapes.root");
+  TFile * file = new TFile("data_doubleb_shapes.root");
+  TFile * fileSig = new TFile("signal_doubleb_shapes.root");
   RooWorkspace * w = (RooWorkspace*)file->Get("w");
   RooWorkspace * wSig = (RooWorkspace*)fileSig->Get("w");
 
-  for (int i=0; i<5; ++i) {
+  for (int i=0; i<4; ++i) {
 
     RooRealVar * qqHRateVar = wSig->var("vbf_yield_"+names[i]);
     RooRealVar * ggHRateVar = wSig->var("ggh_yield_"+names[i]);
@@ -29,7 +29,7 @@ void CreateDatacards() {
     float sigmaE = sigmaVar->getError();
 
     ostringstream str;
-    str << "datacards_singleb_" << names[i] << ".txt";
+    str << "datacards_doubleb_" << names[i] << ".txt";
     string nn = str.str();
     const char * p = nn.c_str();
     std::ofstream textfile(p);
@@ -37,10 +37,10 @@ void CreateDatacards() {
     textfile << "jmax *" << endl;
     textfile << "kmax *" << endl;
     textfile << "----------------------------------------------------------------------------------------------------" << endl;
-    textfile << "shapes          qcd             *   data_singleb_shapes.root     w:qcd_$CHANNEL" << endl;
-    textfile << "shapes          data_obs        *   data_singleb_shapes.root     w:data_$CHANNEL" << endl;
-    textfile << "shapes          qqH_hbb         *   signal_singleb_shapes.root   w:sig_$CHANNEL" << endl;
-    textfile << "shapes          ggH_hbb         *   signal_singleb_shapes.root   w:sig_$CHANNEL" << endl;
+    textfile << "shapes          qcd             *   data_doubleb_shapes.root     w:qcd_$CHANNEL" << endl;
+    textfile << "shapes          data_obs        *   data_doubleb_shapes.root     w:data_$CHANNEL" << endl;
+    textfile << "shapes          qqH_hbb         *   signal_doubleb_shapes.root   w:sig_$CHANNEL" << endl;
+    textfile << "shapes          ggH_hbb         *   signal_doubleb_shapes.root   w:sig_$CHANNEL" << endl;
     textfile << "----------------------------------------------------------------------------------------------------" << endl;
     textfile << "bin             " << names[i] << endl;
     textfile << "observation   -1" << endl;
@@ -58,7 +58,7 @@ void CreateDatacards() {
     textfile << "CMS_vbfbb_res_mbb_13TeV_2018    param 1.0 0.035" << endl;
     textfile << "mean_sig_" << names[i] << "     param " << mean << " " << meanE << endl;
     textfile << "sigma_sig_" << names[i] << "    param " << sigma << " " << sigmaE << endl;
-    textfile << "bkgNorm_" << names[i] << "  rateParam  " << names[i] << "   qcd   1   [0.5,1.5]" << endl;
+    textfile << "bkgNorm_" << names[i] << "   rateParam  " << names[i] << "   qcd   1   [0.5,1.5]" << endl;
     textfile << endl;
   }
 

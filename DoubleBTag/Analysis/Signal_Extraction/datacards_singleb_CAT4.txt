@@ -13,15 +13,14 @@ observation   -1
 bin             CAT4 CAT4 CAT4
 process          ggH_hbb   qqH_hbb   qcd
 process            -1         0       1 
-rate            72.4883  36.9982 260195
+rate            65.5415  36.9982 260195
 ----------------------------------------------------------------------------------------------------
 CMS_ggH_sys       lnN  1.15   -      -
 CMS_qqH_sys       lnN   -    1.15    -
 CMS_sig_corrsys   lnN  1.20  1.10    -
+CMS_qcd_norm      lnU   -     -    1.5
 ----------------------------------------------------------------------------------------------------
 CMS_vbfbb_scale_mbb_13TeV_2018  param 1.0 0.015
 CMS_vbfbb_res_mbb_13TeV_2018    param 1.0 0.035
-mean_sig_CAT4     param 119.357 2.89242
-sigma_sig_CAT4    param 12.3218 2.51448
-bkgNorm_CAT4  rateParam  CAT4   qcd   1   [0.5,1.5]
-
+mean_sig_CAT4     param 119.231 3.31723
+sigma_sig_CAT4    param 12.6761 2.69786

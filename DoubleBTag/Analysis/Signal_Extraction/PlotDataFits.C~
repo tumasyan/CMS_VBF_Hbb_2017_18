@@ -1,7 +1,7 @@
 #include "HttStylesNew.cc"
 #include "Common.h"
 void PlotDataFits(int iCAT=0, 
-		  int iORDER=5,
+		  int iORDER=4,
 		  int nB = 120,
 		  bool blind = false) {
 
@@ -30,12 +30,18 @@ void PlotDataFits(int iCAT=0,
   InitData(hist);
 
   RooRealVar mbb("mbb_"+names[iCAT],"mass(bb)",80,200);
-  RooRealVar b0("b0_"+names[iCAT],"b0",0,300);
-  RooRealVar b1("b1_"+names[iCAT],"b1",0,300);
-  RooRealVar b2("b2_"+names[iCAT],"b2",0,300);
-  RooRealVar b3("b3_"+names[iCAT],"b3",0,300);
-  RooRealVar b4("b4_"+names[iCAT],"b4",0,300);
-  RooRealVar b5("b5_"+names[iCAT],"b5",0,300);
+  RooRealVar b0("b0_"+names[iCAT],"b0",0,1);
+  RooRealVar b1("b1_"+names[iCAT],"b1",0,1);
+  RooRealVar b2("b2_"+names[iCAT],"b2",0,1);
+  RooRealVar b3("b3_"+names[iCAT],"b3",0,1);
+  RooRealVar b4("b4_"+names[iCAT],"b4",0,1);
+  RooRealVar b5("b5_"+names[iCAT],"b5",0,1);
+  b0.setConstant(false);
+  b1.setConstant(false);
+  b2.setConstant(false);
+  b3.setConstant(false);
+  b4.setConstant(false);
+  b5.setConstant(false);
 
   RooArgList argList(b0,b1,b2);
   if (iORDER>=4)
@@ -65,7 +71,7 @@ void PlotDataFits(int iCAT=0,
   xframe->SetTitle("              "+names[iCAT]);
   xframe->GetYaxis()->SetTitle("Events / 2 GeV");
   xframe->GetXaxis()->SetTitle("m_{bb} [GeV]");
-  xframe->GetYaxis()->SetTitleOffset(1.6);
+  xframe->GetYaxis()->SetTitleOffset(1.);
 
   TCanvas * canv = new TCanvas("canv","",700,700);
   xframe->Draw();
@@ -82,5 +88,6 @@ void PlotDataFits(int iCAT=0,
   double prob = TMath::Prob(chi2,ndof);
   cout << "Chi2/ndof = " << chi2 << "/" << ndof << " = " << chi2/ndof << "  prob = " << prob << endl;
   cout << "HISTOGRAM ENTRIES = " << hist->GetSumOfWeights() << endl;
+
 
 }
